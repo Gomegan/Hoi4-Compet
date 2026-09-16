@@ -1523,9 +1523,6 @@
     statusEl.innerHTML = '⏳ Синхронизация...';
 
     try {
-      const headers = {};
-      if (READ_KEY) headers['X-Access-Key'] = READ_KEY;
-
       const res = await fetch(WORKER_DB_URL); // Никакие ключи(headers) с фронтенда больше передавать не нужно!
       if (!res.ok) throw new Error();
       const data = await res.json();
