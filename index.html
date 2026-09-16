@@ -1639,13 +1639,18 @@
       // ----------------------------------------------------
 
       try {
-        // Мы вставили ID (6aa6da...) напрямую. Это безопасно, так как сам по себе ID не является секретом.
-        const testRes = await fetch(`https://api.jsonbin.io/v3/b/6aa6da07ac6210605ac87b0d/versions/count`, {
-          method: 'GET',
-          headers: { 'X-Master-Key': candidateKey }
+        // Проверяем ключ НЕ через JSONBin (там чтение бина не требует валидного мастер-ключа,
+        // и почти правильный ключ проходил бы как настоящий), а через свой Worker — он хранит
+        // настоящий ключ в секретной переменной окружения и делает точное сравнение на сервере.
+        const testRes = await fetch(WORKER_DB_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verifyKey', key: candidateKey })
         });
-        
+
         if (!testRes.ok) throw new Error();
+        const verifyData = await testRes.json();
+        if (!verifyData.ok) throw new Error();
 
         adminKey = candidateKey;
         sessionStorage.setItem('hoi4_admin_key', adminKey);
