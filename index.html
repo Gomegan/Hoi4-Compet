@@ -1,0 +1,3038 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Origion Reload — ТИР ЛИСТ</title>
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🕊️</text></svg>">
+
+<!-- Премиальная типографика -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&family=Oswald:wght@600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+  :root {
+    /* Зимняя Полярная Ночь */
+    --bg-abyss: #03050a;
+    --bg-base: #070a16;
+    --bg-surface: rgba(13, 19, 41, 0.75);
+    --bg-surface-elevated: rgba(22, 31, 62, 0.85);
+    --bg-card: rgba(17, 24, 48, 0.85);
+    --bg-card-solid: #0d132a;
+
+    /* Магия Северного Сияния */
+    --hud-cyan: #38bdf8;
+    --hud-cyan-glow: rgba(56, 189, 248, 0.5);
+    --aurora-green: #10b981;
+    
+    /* Золото / Свечи (Теплый уют) */
+    --brass: #fbbf24;
+    --brass-gold: #f59e0b;
+    --brass-light: #fcd34d;
+    --brass-dark: #b45309;
+    --brass-glow: rgba(245, 158, 11, 0.4);
+    --brass-border: rgba(245, 158, 11, 0.6);
+    --brass-gradient: linear-gradient(135deg, #f59e0b 0%, #ea580c 100%);
+
+    /* Сказочный дух голубя */
+    --dove-blue: #e0f2fe;
+    --dove-glow: rgba(16, 185, 129, 0.7);
+
+    /* Фракция Ось: Настоящий темный красный */
+    --axis: #b91c1c; /* Темно-красный вместо розового #d946ef */
+    --axis-crimson: #991b1b;
+    --axis-dark: #7f1d1d;
+    --axis-bg: rgba(185, 28, 28, 0.15);
+    --axis-border: rgba(245, 158, 11, 0.7); /* Оставляем янтарную грань для контраста */
+    --axis-glow: rgba(185, 28, 28, 0.5);
+
+    /* Фракция Союзники: Глубокий темно-синий */
+    --allies: #0369a1; /* Темно-синий вместо яркого голубого #06b6d4 */
+    --allies-cobalt: #075985;
+    --allies-dark: #0c4a6e;
+    --allies-bg: rgba(3, 105, 161, 0.15); 
+    --allies-border: rgba(56, 189, 248, 0.7); /* Голубая грань для контраста */
+    --allies-glow: rgba(3, 105, 161, 0.5);
+
+    /* Текстовая шкала */
+    --text-primary: #f8fafc;
+    --text-secondary: #bae6fd;
+    --text-muted: #64748b;
+
+    /* Мультяшные формы */
+    --border-subtle: rgba(255, 255, 255, 0.1);
+    --border-medium: rgba(255, 255, 255, 0.2);
+    --border-chunky: 3px solid rgba(255, 255, 255, 0.12);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    
+    /* Объемные тени (Chunky UI) */
+    --shadow-btn: 0 4px 0 rgba(0,0,0,0.4);
+    --shadow-btn-active: 0 0px 0 rgba(0,0,0,0.4);
+    --shadow-card: 0 10px 0 rgba(0,0,0,0.3);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  ::selection {
+    background: var(--aurora-green);
+    color: #000;
+    text-shadow: none;
+  }
+
+  html, body {
+    height: 100vh;
+  }
+
+  body {
+    background-color: var(--bg-abyss);
+    
+    /* --- ЛЕДЯНАЯ 3D ЛУНА В СТИЛЕ СЕВЕРНОГО СИЯНИЯ --- */
+    background-image: 
+      /* 1. Текстура / кратеры (смягченные под холодную гамму) */
+      radial-gradient(circle at calc(100% - 158px) 108px, rgba(0,0,0,0.25) 0%, transparent 4px),
+      radial-gradient(circle at calc(100% - 143px) 123px, rgba(0,0,0,0.2) 0%, transparent 6px),
+      radial-gradient(circle at calc(100% - 155px) 127px, rgba(0,0,0,0.15) 0%, transparent 4px),
+      
+      /* 2. Ледяное тело луны (переход от белого к лунно-голубому и тени) */
+      radial-gradient(circle at calc(100% - 150px) 115px, 
+        #f0fdf4 0%,               /* Мягкий светлый центр */
+        #bae6fd 10px,             /* Ледяной голубой оттенок (--text-secondary) */
+        #0284c7 24px,             /* Глубокий синий полутеневой край */
+        rgba(3, 5, 10, 0.95) 30px,/* Плавное растворение в темноте ночи */
+        transparent 31px          /* Обрезка круга */
+      ),
+      
+      /* 3. Неоновое гало (подсветка в стиле HUD-cyan) */
+      radial-gradient(circle at calc(100% - 150px) 115px, rgba(56, 189, 248, 0.25) 30px, rgba(56, 189, 248, 0.05) 60px, transparent 110px),
+      
+      /* 4. Атмосферное рассеивание света в небе */
+      radial-gradient(circle at calc(100% - 150px) 115px, rgba(56, 189, 248, 0.04) 60px, transparent 220px);
+      
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* ------------------------------------------------ */
+
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Анимация падающего снега */
+  @keyframes snow-fall {
+    0% { background-position: 0px 0px, 0px 0px, 0px 0px; }
+    100% { background-position: 400px 1000px, 300px 800px, 200px 600px; }
+  }
+
+ /* Анимация переливов Северного сияния (Ленты) */
+  /* Анимация переливов Северного сияния */
+  @keyframes aurora-wave {
+    0% { 
+      transform: translateX(-15%) translateY(-10%) rotate(-5deg) scale(1.2); 
+      opacity: 0.25; /* Было 0.6, теперь тусклее */
+    }
+    50% { 
+      transform: translateX(10%) translateY(10%) rotate(5deg) scale(1.5); 
+      opacity: 0.55; /* На пике светит мягко, не выжигая глаза (было 0.95) */
+    }
+    100% { 
+      transform: translateX(-15%) translateY(-10%) rotate(-5deg) scale(1.2); 
+      opacity: 0.25; 
+    }
+  }
+
+  @keyframes aurora-colors {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Северное сияние (Мягкие ленты) */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%; left: -50%; right: -50%; bottom: -50%;
+    
+    /* Снижены значения прозрачности (последняя цифра в rgba), чтобы не слепило */
+    background: 
+      radial-gradient(ellipse 100% 30% at 30% 40%, rgba(16, 185, 129, 0.25) 0%, transparent 50%), 
+      radial-gradient(ellipse 120% 25% at 70% 50%, rgba(56, 189, 248, 0.35) 0%, transparent 50%), 
+      radial-gradient(ellipse 110% 35% at 50% 30%, rgba(20, 184, 166, 0.2) 0%, transparent 50%), 
+      radial-gradient(ellipse 90% 25% at 20% 60%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),  
+      radial-gradient(ellipse 100% 30% at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%); 
+    
+    background-size: 200% 200%;
+    filter: blur(60px); 
+    z-index: -2; /* Сияние находится над луной (-3), но под снегом (-1) */
+    animation: 
+      aurora-wave 25s ease-in-out infinite,
+      aurora-colors 15s ease-in-out infinite;
+    pointer-events: none;
+    mix-blend-mode: screen; 
+  }
+
+ /* Бесшовный бесконечный снег */
+  @keyframes snow-fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(500px); } /* Прокрутка ровно на высоту паттерна */
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: -500px 0 0 0; /* Расширяем область сверху, чтобы снег не появлялся резко из ниоткуда */
+    
+    /* Создаем многослойный бесшовный узор из снежинок разного размера и прозрачности */
+    background-image: 
+      radial-gradient(3px 3px at 20px 50px, rgba(255,255,255,0.8), transparent),
+      radial-gradient(2px 2px at 150px 120px, rgba(255,255,255,0.6), transparent),
+      radial-gradient(4px 4px at 280px 200px, rgba(255,255,255,0.9), transparent),
+      radial-gradient(2px 2px at 350px 320px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(3px 3px at 80px 410px, rgba(255,255,255,0.7), transparent),
+      radial-gradient(5px 5px at 220px 480px, rgba(255,255,255,0.4), transparent);
+      
+    background-size: 400px 500px; /* Размер сетки повторяющегося узора */
+    background-repeat: repeat;
+    
+    animation: snow-fall 12s linear infinite; /* Плавное бесконечное движение */
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  /* Мультяшный скроллбар */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border: 2px solid var(--bg-base); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--hud-cyan); }
+
+  .app-container {
+    max-width: 1440px;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Вместо sci-fi углов делаем скругленные морозные рамки */
+  .tactical-frame {
+    border-radius: var(--radius-md);
+    position: relative;
+  }
+  .tactical-frame::before {
+    content: '❄';
+    position: absolute;
+    top: -8px; left: -8px;
+    color: var(--hud-cyan);
+    font-size: 16px;
+    text-shadow: 0 0 10px var(--hud-cyan-glow);
+    z-index: 2;
+    animation: spin-snow 10s linear infinite;
+    pointer-events: none;
+    opacity: 0; /* Спрятано, чтобы не засорять UI, но оставлено для совместимости селекторов */
+  }
+  @keyframes spin-snow { 100% { transform: rotate(360deg); } }
+
+  /* 1. ХЕДЕР */
+  .top-branding {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 24px;
+    background: linear-gradient(180deg, rgba(22, 31, 62, 0.9), rgba(13, 19, 41, 0.9));
+    backdrop-filter: blur(20px);
+    border: var(--border-chunky);
+    border-bottom: 4px solid var(--aurora-green);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card), inset 0 2px 0 rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand-title-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .brand-logo-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 3px solid var(--hud-cyan);
+    border-radius: 20px; /* Squircle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 0 rgba(0,0,0,0.3), inset 0 0 20px var(--hud-cyan-glow);
+    user-select: none;
+    flex-shrink: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .brand-logo-icon:hover {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  .brand-logo-icon .brand-dove {
+    font-size: 34px;
+    line-height: 1;
+    /* Авроровое свечение сказочного духа */
+    filter: drop-shadow(0 0 10px var(--aurora-green)) drop-shadow(0 0 20px var(--hud-cyan));
+    animation: dove-float 4s ease-in-out infinite;
+  }
+  @keyframes dove-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  
+  .brand-text h1 {
+    font-family: 'Oswald', 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 4px 0 rgba(0,0,0,0.5), 0 0 15px var(--hud-cyan);
+    line-height: 1.1;
+  }
+  .brand-text p {
+    font-size: 13px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--aurora-green);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 800;
+    text-shadow: 0 0 8px var(--aurora-green);
+  }
+  .brand-text p::before {
+    content: '❅';
+    font-size: 14px;
+    color: var(--hud-cyan);
+    animation: spin-snow 5s linear infinite;
+  }
+
+  /* Штамп статуса */
+  #sync-status {
+    background: rgba(16, 185, 129, 0.15);
+    border: 2px solid var(--aurora-green);
+    color: #fff;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.3), inset 0 0 10px rgba(16, 185, 129, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 5px var(--aurora-green);
+  }
+
+  /* 2. НАВИГАЦИЯ */
+  .nav-tabs {
+    flex-shrink: 0;
+    display: flex;
+    gap: 12px;
+    background: rgba(13, 19, 41, 0.8);
+    backdrop-filter: blur(15px);
+    border: var(--border-chunky);
+    padding: 8px;
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    width: 100%;
+    box-shadow: var(--shadow-card);
+  }
+  .tab-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid transparent;
+    color: var(--text-secondary);
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-family: 'Oswald', 'Rajdhani', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+  }
+  .tab-btn:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.2);
+  }
+  .tab-btn.active {
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.2), rgba(16, 185, 129, 0.2));
+    border: 2px solid var(--hud-cyan);
+    color: #ffffff;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.4), inset 0 0 15px var(--hud-cyan-glow);
+    text-shadow: 0 0 5px var(--hud-cyan);
+    transform: translateY(2px);
+  }
+  .badge-counter {
+    background: #000;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    border: 2px solid var(--border-medium);
+    color: var(--text-secondary);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+  }
+  .tab-btn.active .badge-counter {
+    border-color: var(--aurora-green);
+    color: var(--aurora-green);
+    background: rgba(0,0,0,0.5);
+  }
+
+  /* 3. ПАНЕЛЬ УПРАВЛЕНИЯ */
+  .controls-panel {
+    flex-shrink: 0;
+    background: var(--bg-card);
+    backdrop-filter: blur(15px);
+    border: var(--border-chunky);
+    border-radius: var(--radius-lg);
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    box-shadow: var(--shadow-card);
+  }
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    color: var(--text-secondary);
+    padding: 8px 16px;
+    border-radius: 12px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-transform: uppercase;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+  }
+  .filter-btn:active { transform: translateY(3px); box-shadow: none; }
+  .filter-btn.active {
+    background: var(--aurora-green);
+    border-color: #059669;
+    color: #fff;
+    box-shadow: 0 3px 0 #064e3b;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.3);
+  }
+
+  .controls-search-actions {
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap; flex: 1 1 auto; justify-content: flex-end;
+  }
+  .search-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--border-medium);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    min-width: 200px; flex: 1 1 200px;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .search-box:focus {
+    border-color: var(--hud-cyan);
+    background: rgba(0,0,0,0.6);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), 0 0 10px var(--hud-cyan-glow);
+  }
+
+  /* ЕДИНАЯ СИСТЕМА КНОПОК (Chunky Cartoon) */
+  .action-btns { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .btn {
+    border: 2px solid var(--border-medium);
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    font-family: 'Oswald', 'Rajdhani', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    user-select: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-btn);
+    background: rgba(255,255,255,0.1);
+  }
+  .btn:active { transform: translateY(4px); box-shadow: var(--shadow-btn-active); }
+  
+  .btn-gold {
+    background: var(--brass-gradient); border-color: #fcd34d; color: #fff;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.4);
+  }
+  .btn-axis {
+    background: linear-gradient(135deg, var(--axis) 0%, var(--axis-dark) 100%); 
+    border-color: var(--axis-border); color: #fff;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.4);
+  }
+  .btn-allies {
+    background: linear-gradient(135deg, var(--allies) 0%, var(--allies-dark) 100%); 
+    border-color: var(--allies-border); color: #fff;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.4);
+  }
+  .btn-action { background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.4); color: var(--hud-cyan); }
+  .btn-action:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--hud-cyan); color: #fff; }
+  
+  .btn-export { background: linear-gradient(135deg, #10b981 0%, #047857 100%); border-color: #34d399; }
+  .btn-admin { background: rgba(0,0,0,0.5); }
+  .btn-admin.active { background: var(--aurora-green); border-color: #34d399; }
+  /* Эффекты при наведении на кнопки фильтров (Тиры) */
+  .filter-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15); /* Чуть осветляем фон */
+    border-color: var(--hud-cyan); /* Подсвечиваем рамку голубым */
+    color: #ffffff;
+    transform: translateY(-2px); /* Кнопка слегка приподнимается */
+    box-shadow: 0 5px 0 rgba(0,0,0,0.25), 0 0 10px var(--hud-cyan-glow); /* Добавляем тень и свечение */
+  }
+
+  /* Эффект наведения для кнопки "Админ" */
+  .btn-admin:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--hud-cyan);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4), 0 0 10px rgba(255,255,255,0.2);
+  }
+
+  /* Эффект наведения для красных кнопок ("Собрать лобби", "Победа ОСИ") */
+  .btn-axis:hover {
+    background: linear-gradient(135deg, #dc2626 0%, var(--axis) 100%); /* Делаем градиент ярче */
+    border-color: #fcd34d;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4), 0 0 15px var(--axis-glow);
+  }
+
+  /* Эффект наведения для кнопки "Скачать PNG" */
+  .btn-export:hover {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    border-color: #6ee7b7;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4), 0 0 15px rgba(16, 185, 129, 0.5);
+  }
+  
+  /* Бонус: добавляем hover и для остальных кнопок (Золотых и Синих), чтобы всё работало единообразно */
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #fcd34d 0%, #f59e0b 100%);
+    border-color: #fde68a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4), 0 0 15px var(--brass-glow);
+  }
+
+  .btn-allies:hover {
+    background: linear-gradient(135deg, var(--allies-cobalt) 0%, var(--allies) 100%);
+    border-color: #7dd3fc;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 rgba(0,0,0,0.4), 0 0 15px var(--allies-glow);
+  }
+
+  /* 4. СЕКЦИИ */
+  #section-roster {
+    flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; overflow: hidden;
+  }
+  .content-section, #roster-card {
+    flex: 1; min-height: 0; display: flex; flex-direction: column;
+    background: var(--bg-card); backdrop-filter: blur(15px);
+    border: var(--border-chunky); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden; width: 100%;
+  }
+
+  .header-widget {
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.3);
+    padding: 10px 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    border-bottom: 3px solid rgba(255,255,255,0.1);
+  }
+  .header-title {
+    font-family: 'Oswald', 'Rajdhani', sans-serif;
+    font-size: 22px; font-weight: 700; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    display: flex; align-items: center; gap: 10px; text-transform: uppercase;
+  }
+  .stats-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  .stat-card {
+    background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+    border-radius: 12px; padding: 6px 16px;
+    display: flex; flex-direction: column; align-items: center;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+  }
+  .stat-label { font-size: 11px; color: var(--text-secondary); text-transform: uppercase; font-weight: 800; font-family: 'Rajdhani', sans-serif; }
+  .stat-val { font-size: 18px; font-weight: 800; color: #fff; font-family: 'JetBrains Mono', monospace; text-shadow: 0 2px 2px rgba(0,0,0,0.5); }
+
+  /* ТАБЛИЦА */
+  .table-responsive { width: 100%; flex: 1; min-height: 0; overflow-y: auto; overflow-x: auto; padding: 8px; }
+  table { width: 100%; border-collapse: separate; border-spacing: 0 4px; font-size: 14px; min-width: 1020px; }
+  th {
+    background: rgba(0,0,0,0.4); position: sticky; top: 0; z-index: 10;
+    padding: 10px; /* Было 14px */
+    color: var(--hud-cyan); font-family: 'Oswald', sans-serif;
+    font-weight: 700; text-transform: uppercase; font-size: 14px;
+    border-bottom: 3px solid rgba(255,255,255,0.1); border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+  td {
+    padding: 6px 10px; /* Было 12px 14px - это сильно сожмет строки по высоте */
+    background: rgba(255,255,255,0.03);
+    vertical-align: middle;
+    transition: all 0.2s;
+  }
+  tbody tr td:first-child { border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+  tbody tr td:last-child { border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+  tr:hover td { background: rgba(56, 189, 248, 0.15) !important; }
+  tr.row-selected td {
+    background: rgba(245, 158, 11, 0.15) !important;
+    box-shadow: inset 0 2px 0 var(--brass-gold), inset 0 -2px 0 var(--brass-gold);
+  }
+  
+  .custom-check { width: 20px; height: 20px; accent-color: var(--hud-cyan); cursor: pointer; }
+
+  .country-flag-img {
+    width: 28px; height: 18px; object-fit: cover; border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.3);
+    vertical-align: middle; display: inline-block; flex-shrink: 0;
+  }
+
+  .rank-medal {
+    font-size: 13px; /* Было 14px */
+    font-weight: 800; font-family: 'JetBrains Mono', monospace;
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; /* Было 32px 32px */
+    border-radius: 8px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2);
+  }
+  .rank-gold { background: var(--brass-gradient); color: #fff; text-shadow: 0 2px 2px rgba(0,0,0,0.4); border-color: #fcd34d; }
+  .rank-silver { background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%); color: #fff; border-color: #f1f5f9; }
+  .rank-bronze { background: linear-gradient(135deg, #d97706 0%, #92400e 100%); color: #fff; border-color: #f59e0b; }
+  .rank-other { background: rgba(0,0,0,0.4); color: var(--text-muted); }
+
+  .player-name-text { font-weight: 800; font-size: 15px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+  .player-discord-tag { font-size: 11px; font-weight: 600; color: var(--hud-cyan); margin-top: 4px; opacity: 0.9; }
+
+  .tier-badge {
+    padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;
+    font-family: 'JetBrains Mono', monospace; display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2);
+    text-shadow: 0 2px 2px rgba(0,0,0,0.3); color: #fff;
+  }
+  .tier-20 { background: #ef4444; border-color: #f87171; }
+  .tier-15 { background: #f59e0b; border-color: #fbbf24; }
+  .tier-10 { background: #10b981; border-color: #34d399; }
+  .tier-7  { background: #38bdf8; border-color: #7dd3fc; }
+  .tier-5  { background: #a855f7; border-color: #d8b4fe; }
+  .tier-3  { background: #ec4899; border-color: #f472b6; }
+  .tier-1  { background: #64748b; border-color: #94a3b8; }
+
+  .score-val { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 16px; color: var(--hud-cyan); text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+
+  .stat-gauge-wrap { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
+  .stat-pill { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 14px; text-shadow: 0 2px 2px rgba(0,0,0,0.5); }
+  .stat-bar-track {
+    width: 46px; height: 8px; background: rgba(0,0,0,0.5);
+    border-radius: 4px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .stat-bar-fill { height: 100%; border-radius: 4px; }
+
+  .stat-macro { color: #f43f5e; } .stat-macro-fill { background: #f43f5e; }
+  .stat-micro { color: #38bdf8; } .stat-micro-fill { background: #38bdf8; }
+  .stat-fleet { color: #fbbf24; } .stat-fleet-fill { background: #fbbf24; }
+  .stat-team  { color: #a855f7; } .stat-team-fill { background: #a855f7; }
+
+  .winrate-wrap { display: flex; align-items: center; gap: 10px; }
+  .winrate-bar-bg {
+    width: 60px; height: 10px; background: rgba(0,0,0,0.5); border-radius: 5px;
+    overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+  }
+  .winrate-bar-fill { height: 100%; background: linear-gradient(90deg, #38bdf8, #8b5cf6); border-radius: 5px; }
+
+  .player-desc {
+    font-size: 13px; color: var(--text-secondary); max-width: 250px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    background: rgba(0,0,0,0.2); padding: 6px 10px; border-radius: 8px;
+  }
+
+  /* 5. ЛОББИ (WAR ROOM) */
+  #section-lobby {
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto !important; /* <--- ИСПРАВЛЕНО: РАЗРЕШАЕМ СКРОЛЛ */
+    padding: 0;
+  }
+  
+  .lobby-header {
+    background: rgba(0,0,0,0.3);
+    padding: 8px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 3px solid rgba(255,255,255,0.1); flex-wrap: wrap; gap: 8px;
+    flex-shrink: 0;
+  }
+  .mode-switch-group { display: flex; background: rgba(0,0,0,0.5); padding: 4px; border-radius: 12px; gap: 4px; }
+  .mode-btn {
+    background: transparent; border: none; color: var(--text-secondary);
+    padding: 6px 14px; font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700;
+    border-radius: 8px; cursor: pointer; text-transform: uppercase;
+  }
+  .mode-btn.active { background: var(--aurora-green); color: #fff; box-shadow: 0 2px 0 rgba(0,0,0,0.3); }
+  /* Эффект при наведении (только на ту кнопку, которая сейчас НЕ нажата) */
+  .mode-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1); /* Легкая полупрозрачная подсветка фона */
+    color: #ffffff; /* Делаем текст белоснежным */
+    transform: translateY(-1px); /* Чуть-чуть приподнимаем */
+    box-shadow: 0 2px 0 rgba(0,0,0,0.15); /* Добавляем микро-тень для объема */
+  }
+
+  .factions-grid {
+    flex: 0 0 auto; 
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 8px;
+    /* Убрали min-height и overflow */
+  }
+  .faction-panel {
+    background: rgba(13, 19, 41, 0.6);
+    border: var(--border-chunky); border-radius: var(--radius-md);
+    display: flex; flex-direction: column; 
+    box-shadow: 0 8px 0 rgba(0,0,0,0.25);
+    height: fit-content; /* Панель подстраивается под количество стран */
+  }
+  .faction-title-bar {
+    padding: 8px 14px; flex-shrink: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Oswald', sans-serif; font-weight: 800; font-size: 15px; text-transform: uppercase;
+    border-top-left-radius: 13px; /* <--- ДОБАВЛЕНО */
+    border-top-right-radius: 13px; /* <--- ДОБАВЛЕНО */
+  }
+  .faction-title-bar.axis {
+    background: var(--axis); color: #fff; text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+    border-bottom: 3px solid var(--axis-border);
+  }
+  .faction-title-bar.allies {
+    background: var(--allies); color: #fff; text-shadow: 0 2px 2px rgba(0,0,0,0.5);
+    border-bottom: 3px solid var(--allies-border);
+  }
+
+  /* КРИТИЧНО ДЛЯ СЖАТИЯ СЛОТОВ БЕЗ СКРОЛЛБАРА */
+  #axis-slots-container, #allies-slots-container {
+    display: flex; flex-direction: column; 
+    justify-content: flex-start; /* Убрали stretch, который делал дыры */
+    flex: 1 1 auto; gap: 2px; padding: 4px;
+  }
+  
+  .slot-row {
+    flex: 0 0 auto; /* Больше не растягиваем сами слоты */
+    height: 38px; /* Жестко фиксируем их высоту */
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 2px 8px; background: rgba(0,0,0,0.3); border-radius: 8px;
+    font-size: 12px; gap: 8px; cursor: grab; transition: transform 0.1s;
+    border: 1px solid transparent;
+  }
+  .slot-row:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
+  .slot-row.is-general { background: rgba(0,0,0,0.15); margin-left: 16px; border-left: 3px solid rgba(255,255,255,0.1); }
+  .slot-row.dragging { opacity: 0.5; border: 2px dashed #fff; }
+
+  .drag-handle { color: var(--text-muted); font-size: 14px; user-select: none; cursor: grab; padding-right: 4px; }
+  .slot-country-tag { 
+    display: inline-flex; align-items: center; gap: 8px; font-weight: 700; 
+    width: 180px; /* Увеличили со 140px, чтобы влезла Великобритания */
+    flex-shrink: 0; 
+  }
+  .slot-country-tag div { 
+    line-height: 1.1; 
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap; /* Защита от вылезания за края */
+    width: 100%;
+  }
+  .slot-player-info { display: flex; align-items: center; flex: 1 1 auto; }
+  
+  .player-slot-btn {
+    background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); color: #fff;
+    padding: 3px 8px; border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 700;
+    font-size: 12px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2); width: 100%; justify-content: space-between;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Добавляем плавность */
+  }
+  
+  /* Новый визуальный отклик при наведении */
+  .player-slot-btn:hover {
+    background: rgba(56, 189, 248, 0.15); /* Нежно-голубой фон */
+    border-color: var(--hud-cyan) !important; /* Подсвечиваем рамку */
+    color: #ffffff !important; /* Делаем текст белым (перебивает серый цвет пустой кнопки) */
+    opacity: 1 !important; /* Убираем полупрозрачность у пустой кнопки */
+    transform: translateY(-1px); /* Слегка приподнимаем */
+    box-shadow: 0 3px 0 rgba(0,0,0,0.3), 0 0 10px var(--hud-cyan-glow); /* Добавляем свечение */
+  }
+  
+  .player-slot-btn:active { transform: translateY(2px); box-shadow: none; }
+
+  /* Резерв / Скамейка */
+  .bench-panel {
+    background: rgba(0,0,0,0.4); border-top: 3px solid rgba(255,255,255,0.1);
+    padding: 8px 16px; flex-shrink: 0; display: flex; flex-direction: column;
+    /* --- ДОБАВЛЕНО: Отступы снизу для мобилок и фикс высоты --- */
+    min-height: 120px;
+    padding-bottom: 24px;
+  }
+  .bench-list {
+    display: flex; flex-wrap: wrap; gap: 6px; min-height: 38px; margin-top: 6px;
+    padding: 6px; border-radius: 12px; background: rgba(0,0,0,0.3); border: 2px dashed rgba(255,255,255,0.1);
+  }
+  /* Плашка бойца в резерве (добавляем плавность) */
+  .bench-badge {
+    background: var(--bg-card); border: 2px solid rgba(255,255,255,0.15); border-radius: 8px;
+    padding: 4px 10px; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
+    cursor: grab; box-shadow: 0 3px 0 rgba(0,0,0,0.3);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); /* Плавная анимация */
+  }
+  
+  /* Эффект наведения для бойцов уже сидящих в резерве */
+  .bench-badge:hover {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: var(--hud-cyan);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 0 rgba(0,0,0,0.3), 0 0 10px var(--hud-cyan-glow);
+  }
+
+  /* --- УЛУЧШЕНИЯ ДЛЯ ВЫПАДАЮЩЕГО СПИСКА РЕЗЕРВА --- */
+
+  /* Анимация и свечение при наведении на само поле выбора */
+  #bench-add-select {
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+  }
+  
+  #bench-add-select:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--aurora-green); /* Зеленоватая подсветка логично сочетается с иконкой ➕ */
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 12px var(--dove-glow);
+  }
+
+  /* Стилизация самого открытого списка с бойцами */
+  #bench-add-select option {
+    background-color: var(--bg-card-solid); /* Заливаем список темным цветом интерфейса (чтобы не был белым) */
+    color: #f8fafc; /* Белый текст */
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    padding: 8px; /* Немного раздвигаем строки для красоты */
+  }
+
+  /* Выделяем самую первую строчку (плейсхолдер) зеленым цветом */
+  #bench-add-select option[value=""] {
+    color: var(--aurora-green);
+    font-weight: 800;
+  }
+  
+  .drop-zone-active { background: rgba(255,255,255,0.05) !important; outline: 3px dashed var(--hud-cyan) !important; outline-offset: -3px; }
+  .drag-over-item { background: rgba(245, 158, 11, 0.2) !important; outline: 2px solid var(--brass-gold) !important; }
+
+  /* 6. МОДАЛЬНЫЕ ОКНА (Зимние рамки) */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(3, 5, 10, 0.85); backdrop-filter: blur(8px);
+    display: none; justify-content: center; align-items: center; z-index: 10000; padding: 16px;
+  }
+  .modal-window {
+    background: var(--bg-card); border: var(--border-chunky); border-top: 6px solid var(--aurora-green);
+    border-radius: var(--radius-lg); max-width: 560px; width: 100%; padding: 24px;
+    box-shadow: 0 20px 0 rgba(0,0,0,0.4), 0 0 40px rgba(0,0,0,0.5);
+    display: flex; flex-direction: column; gap: 16px; max-height: 90vh; overflow-y: auto;
+    animation: modalBounce 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  @keyframes modalBounce {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 12px;
+    font-family: 'Oswald', sans-serif; font-size: 20px; font-weight: 800; color: #fff; text-transform: uppercase;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+  .form-label { font-size: 12px; font-family: 'Rajdhani', sans-serif; font-weight: 800; color: var(--text-secondary); text-transform: uppercase; }
+  .form-input {
+    background: rgba(0,0,0,0.5); border: 2px solid rgba(255,255,255,0.1); border-radius: 12px;
+    padding: 12px 14px; color: #fff; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600;
+    transition: all 0.2s; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+  }
+  .form-input:focus { border-color: var(--hud-cyan); background: rgba(0,0,0,0.7); box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 0 3px rgba(56, 189, 248, 0.2); outline: none; }
+
+  /* ПЛАШКА ПРОФИЛЯ */
+  #profile-countries-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px;
+    background: rgba(0,0,0,0.3); border-radius: 16px; border: 2px dashed rgba(255,255,255,0.1);
+  }
+  .country-select-chip {
+    display: flex; align-items: center; gap: 10px; padding: 8px; border-radius: 12px;
+    background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); cursor: pointer; user-select: none;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.2); transition: all 0.15s;
+  }
+  .country-select-chip:active { transform: translateY(3px); box-shadow: none; }
+  .country-select-chip.active {
+    background: rgba(16, 185, 129, 0.15); border-color: var(--aurora-green);
+  }
+  .country-name-label { font-size: 13px; font-weight: 700; color: #fff; }
+
+  /* 7. ОПТИМИЗАЦИЯ ПОД PNG */
+  body.exporting { background: var(--bg-base) !important; }
+  body.exporting::before, body.exporting::after { display: none !important; }
+  body.exporting .content-section, body.exporting #roster-card {
+    backdrop-filter: none !important; background: var(--bg-card-solid) !important; border-radius: 0 !important; box-shadow: none !important; border: 1px solid #222 !important;
+  }
+  body.exporting .action-col, body.exporting .check-col, body.exporting .profile-col { display: none !important; }
+
+  @media (max-width: 900px) {
+    .factions-grid { grid-template-columns: 1fr; overflow-y: auto !important; }
+    #section-lobby {
+    flex: 1;
+    flex-direction: column;
+    overflow-y: auto !important; /* ВЕРНУЛИ СКРОЛЛ */
+    padding: 0;
+  }
+    .controls-panel { flex-direction: column; align-items: stretch; }
+    #profile-countries-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-height: 800px) {
+    /* Экстренное сжатие лобби для узких мониторов */
+    .slot-row { min-height: 24px; padding: 1px 6px; font-size: 11px; margin-bottom: 1px; }
+    .player-slot-btn { padding: 2px 6px; font-size: 11px; border-width: 1px; }
+    .faction-title-bar {
+    padding: 8px 14px; flex-shrink: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Oswald', sans-serif; font-weight: 800; font-size: 15px; text-transform: uppercase;
+    /* --- ДОБАВЛЕНО: Скругление верхних углов под радиус родителя --- */
+    border-top-left-radius: calc(var(--radius-md) - 2px);
+    border-top-right-radius: calc(var(--radius-md) - 2px);
+  }
+    .lobby-header { padding: 6px 10px; }
+  }
+  /* Существующий код */
+  th {
+    background: rgba(0,0,0,0.4); position: sticky; top: 0; z-index: 10;
+    padding: 10px; 
+    color: var(--hud-cyan); font-family: 'Oswald', sans-serif;
+    font-weight: 700; text-transform: uppercase; font-size: 14px;
+    border-bottom: 3px solid rgba(255,255,255,0.1); 
+    backdrop-filter: blur(10px);
+  }
+
+  /* Добавляем скругления только для самых крайних ячеек шапки */
+  th:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+  th:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
+
+  /* НОВЫЙ КОД ДОБАВЛЯТЬ СЮДА */
+  th.sortable {
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  th.sortable:hover {
+    background: rgba(56, 189, 248, 0.15); 
+    color: #ffffff; 
+    text-shadow: 0 0 8px var(--hud-cyan); 
+    border-bottom-color: var(--hud-cyan); 
+    transform: translateY(-1px); 
+  }
+
+  th.sortable:active {
+    background: rgba(56, 189, 248, 0.25); 
+    transform: translateY(1px); 
+    border-bottom-color: var(--aurora-green); 
+  }
+  /* КОНЕЦ НОВОГО КОДА */
+
+  td { /* Существующий код продолжается */
+</style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ВЕРХНЯЯ БРЕНДОВАЯ ПЛАШКА: ШАПКА ГЕНШТАБА -->
+  <header class="top-branding tactical-frame">
+    <div class="brand-title-group">
+      <div class="brand-logo-icon">
+        <span class="brand-dove">🕊️</span>
+      </div>
+      <div class="brand-text">
+        <h1>ORIGION RELOAD</h1>
+        <p>ТИР ЛИСТ</p>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span id="sync-status">🟢 База онлайн</span>
+    </div>
+  </header>
+
+  <!-- НАВИГАЦИОННЫЕ ТАБЫ: ПАПКИ ДОСЬЕ -->
+  <div class="nav-tabs">
+    <button id="tab-btn-roster" class="tab-btn active" onclick="switchTab('roster')">
+      🏆 База игроков (Лидерборд) <span id="badge-roster-count" class="badge-counter">0</span>
+    </button>
+    <button id="tab-btn-lobby" class="tab-btn" onclick="switchTab('lobby')">
+      ⚔️ Фракционное лобби <span id="badge-lobby-active" class="badge-counter" style="display:none; color:var(--brass-gold);">●</span>
+    </button>
+    <button id="tab-btn-history" class="tab-btn" onclick="switchTab('history')">
+      📜 Архив кампаний <span id="badge-history-count" class="badge-counter">0</span>
+    </button>
+  </div>
+
+  <!-- ВКЛАДКА 1: БАЗА ИГРОКОВ (ОБЩИЙ ЛИДЕРБОРД) -->
+  <div id="section-roster">
+    <div class="controls-panel tactical-frame">
+      <div class="filter-group">
+        <button class="filter-btn active" onclick="setTierFilter('all', this)">Все тиры</button>
+        <button class="filter-btn" onclick="setTierFilter('20', this)">Тир 20 (S)</button>
+        <button class="filter-btn" onclick="setTierFilter('15', this)">Тир 15 (A)</button>
+        <button class="filter-btn" onclick="setTierFilter('10', this)">Тир 10 (B)</button>
+        <button class="filter-btn" onclick="setTierFilter('7', this)">Тир 7 (C)</button>
+        <button class="filter-btn" onclick="setTierFilter('5', this)">Тир 5 (D)</button>
+        <button class="filter-btn" onclick="setTierFilter('3-1', this)">Тир 3-1</button>
+      </div>
+
+      <div class="controls-search-actions">
+        <input type="text" id="search-input" class="search-box" placeholder="Поиск по позывному или досье..." oninput="renderLeaderboardRoster()">
+        <div class="action-btns">
+          <button id="admin-toggle-btn" class="btn btn-admin" onclick="toggleAdminLogin()">🔑 Админ</button>
+          <button id="btn-add-player" class="btn btn-gold" style="display: none;" onclick="openAddPlayerModal()">➕ Игрок</button>
+          <button class="btn btn-axis" onclick="initManualFactionLobby()" title="Открыть пустое лобби и отправить всех выбранных игроков в резерв">⚖️ Собрать лобби</button>
+          <button id="btn-backup-json" class="btn btn-action" style="display: none;" onclick="exportBackupJSON()">💾 Бэкап</button>
+          <button id="btn-import-json" class="btn btn-action" style="display: none;" onclick="document.getElementById('file-import-input').click()">📥 Импорт</button>
+          <input type="file" id="file-import-input" accept=".json" style="display: none;" onchange="importBackupJSON(event)">
+          <button class="btn btn-export" onclick="exportToPNG()">📸 Скачать PNG</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="roster-card" class="tactical-frame">
+      <div class="header-widget">
+        <div class="header-title-box">
+          <span class="header-title">🏆 Общий лидерборд игроков HoI4</span>
+        </div>
+        <div class="stats-badges">
+          <div class="stat-card">
+            <span class="stat-label">Выбрано в лобби</span>
+            <span class="stat-val" id="stat-selected" style="color: #60a5fa;">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Всего игроков</span>
+            <span class="stat-val" id="stat-count">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Средний рейтинг</span>
+            <span class="stat-val" id="stat-avg">0.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 34px; text-align: center;" class="check-col">
+                <input type="checkbox" id="check-all" onchange="toggleSelectAll(this)" title="Выбрать всех" class="custom-check">
+              </th>
+              <th style="width: 70px; text-align: center;" class="sortable" onclick="sortLeaderboard('points')">Место ⬍</th>
+              <th style="width: 170px;" class="sortable" onclick="sortLeaderboard('name')">Игрок ⬍</th>
+              <th style="width: 95px; text-align: center;" class="sortable" onclick="sortLeaderboard('points')">Тир ⬍</th>
+              <th style="width: 90px; text-align: center;" class="sortable" onclick="sortLeaderboard('score')">Result ⬍</th>
+              <th style="width: 75px; text-align: center;" class="sortable" onclick="sortLeaderboard('macro')">Macro ⬍</th>
+              <th style="width: 75px; text-align: center;" class="sortable" onclick="sortLeaderboard('micro')">Micro ⬍</th>
+              <th style="width: 75px; text-align: center;" class="sortable" onclick="sortLeaderboard('fleet')">Fleet ⬍</th>
+              <th style="width: 75px; text-align: center;" class="sortable" onclick="sortLeaderboard('team')">Team ⬍</th>
+              <th style="width: 95px; text-align: center;" class="sortable" onclick="sortLeaderboard('games')">Игр ⬍</th>
+              <th style="width: 140px;" class="sortable" onclick="sortLeaderboard('winrate')">Винрейт (%) ⬍</th>
+              <th>Выписка из личного досье</th>
+              <th style="width: 95px; text-align: center;">Профиль</th>
+              <th id="th-actions" style="width: 80px; text-align: right; display: none;" class="action-col">Действия</th>
+            </tr>
+          </thead>
+          <tbody id="roster-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ВКЛАДКА 2: ФРАКЦИОННОЕ ЛОББИ (WAR ROOM) -->
+  <div id="section-lobby" class="content-section tactical-frame" style="display: none;">
+    <div class="lobby-header">
+      <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+        <div class="mode-switch-group">
+          <button id="mode-btn-no-asia" class="mode-btn active" onclick="setLobbyMode('no_asia')">
+            ❌ Без Азии
+          </button>
+          <button id="mode-btn-asia" class="mode-btn" onclick="setLobbyMode('asia')">
+            ✅ С Азией
+          </button>
+        </div>
+
+        <button class="btn btn-action" style="padding: 8px 14px; font-size: 12px;" onclick="copyLobbyToDiscord()">📋 Для Discord</button>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span id="lobby-score-diff" class="badge-counter" style="color: var(--brass-gold); font-size: 14px; font-weight: 800; border-color: var(--brass-border); padding: 6px 12px; border-radius: 12px; background: rgba(0,0,0,0.6);">
+          Δ Очков: 0.0
+        </span>
+        <button id="btn-finish-lobby-match" class="btn btn-gold" style="display: none;" onclick="openFinishMatchModal()">🏁 Завершить партию</button>
+      </div>
+    </div>
+
+    <!-- Сетка фракций -->
+    <div class="factions-grid">
+      <!-- ОСЬ -->
+      <div class="faction-panel tactical-frame">
+        <div class="faction-title-bar axis">
+          <span>🔴 СТРАНЫ ОСИ (AXIS)</span>
+          <span id="axis-total-stat" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">Очки: 0.0</span>
+        </div>
+        <div id="axis-slots-container" data-drop-zone="axis"></div>
+      </div>
+
+      <!-- СОЮЗНИКИ -->
+      <div class="faction-panel tactical-frame">
+        <div class="faction-title-bar allies">
+          <span>🔵 СТРАНЫ СОЮЗНИКОВ</span>
+          <span id="allies-total-stat" style="font-family: 'JetBrains Mono', monospace; font-size: 14px;">Очки: 0.0</span>
+        </div>
+        <div id="allies-slots-container" data-drop-zone="allies"></div>
+      </div>
+    </div>
+
+    <!-- Резерв / Скамейка -->
+    <div id="bench-panel" class="bench-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <span style="font-size: 13px; font-weight: 800; color: #fff; text-transform: uppercase; font-family: 'Oswald', sans-serif; letter-spacing: 0.8px;">
+          🛋️ Личный состав в резерве: <span id="bench-count" style="color: var(--hud-cyan);">(0)</span>
+        </span>
+        
+        <!-- Оборачиваем селект и новую кнопку в один flex-контейнер -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button class="btn btn-axis" style="padding: 6px 12px; font-size: 12px;" onclick="clearBench()" title="Очистить весь резерв">🗑️ Очистить</button>
+          
+          <select id="bench-add-select" class="form-input" style="padding: 6px 12px; font-size: 13px; min-width: 200px; border-radius: 8px;" onchange="handleAddPlayerToBench(this)">
+            <option value="">➕ Добавить игрока в резерв...</option>
+          </select>
+        </div>
+      </div>
+      <div class="bench-list" id="bench-container" data-drop-zone="bench"></div>
+    </div>
+  </div>
+
+  <!-- ВКЛАДКА 3: АРХИВ КАМПАНИЙ -->
+  <div id="section-history" class="content-section tactical-frame" style="display: none;">
+    <div class="header-widget">
+      <div class="header-title">📜 Архив сыгранных кампаний</div>
+      <span style="font-size: 12px; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace;">Фиксация исходов мировых войн с защитой целостности данных</span>
+    </div>
+    <div id="history-container" style="padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;"></div>
+  </div>
+
+</div>
+
+<!-- МОДАЛКА ВЫБОРА БОЙЦА НА СЛОТ -->
+<div id="slot-pick-modal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <div id="slot-modal-title" style="display:flex; align-items:center; gap:10px;">Назначить игрока</div>
+      <button style="background:none; border:none; color:var(--text-muted); font-size:24px; font-weight: 800; cursor:pointer;" onclick="closeSlotPickModal()">✕</button>
+    </div>
+    <input type="text" id="slot-player-search" class="form-input" placeholder="Быстрый поиск свободного игрока..." oninput="renderSlotPlayerList()">
+    <div id="slot-players-list" style="display:flex; flex-direction:column; gap:8px; max-height:380px; overflow-y:auto; margin-top:8px; padding-right:4px;"></div>
+  </div>
+</div>
+
+<!-- МОДАЛКА ДОБАВЛЕНИЯ / РЕДАКТИРОВАНИЯ ИГРОКА -->
+<div id="player-modal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <span id="player-modal-title">Игрок</span>
+      <button style="background:none; border:none; color:var(--text-muted); font-size:24px; font-weight: 800; cursor:pointer;" onclick="closePlayerModal()">✕</button>
+    </div>
+    <input type="hidden" id="form-player-id">
+    
+    <div class="form-group">
+      <label class="form-label">Позывной / Никнейм</label>
+      <input type="text" id="form-player-name" class="form-input" placeholder="Напр. feels., Heavely">
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; width: 100%;">
+      <div class="form-group">
+        <label class="form-label">Тир очков (Points: 1 - 20)</label>
+        <select id="form-player-points" class="form-input">
+          <option value="20">Тир 20 (S-Tier)</option>
+          <option value="15">Тир 15 (A-Tier)</option>
+          <option value="10">Тир 10 (B-Tier)</option>
+          <option value="7">Тир 7 (C-Tier)</option>
+          <option value="5">Тир 5 (D-Tier)</option>
+          <option value="3">Тир 3 (E-Tier)</option>
+          <option value="1">Тир 1 (F-Tier)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Итоговый Result (Среднее)</label>
+        <input type="number" step="0.1" id="form-player-result" class="form-input" placeholder="0.0" readonly style="background:rgba(0,0,0,0.8); color:var(--hud-cyan); font-weight:800; cursor:not-allowed; border-color:var(--hud-cyan); text-align:center;">
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; width: 100%;">
+      <div class="form-group">
+        <label class="form-label" style="text-align: center;">Macro</label>
+        <input type="number" step="0.5" id="form-player-macro" class="form-input" placeholder="7.0" oninput="updateFormResult()" style="text-align: center;">
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="text-align: center;">Micro</label>
+        <input type="number" step="0.5" id="form-player-micro" class="form-input" placeholder="7.0" oninput="updateFormResult()" style="text-align: center;">
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="text-align: center;">Fleet</label>
+        <input type="number" step="0.5" id="form-player-fleet" class="form-input" placeholder="7.0" oninput="updateFormResult()" style="text-align: center;">
+      </div>
+      <div class="form-group">
+        <label class="form-label" style="text-align: center;">Teamwork</label>
+        <input type="number" step="0.5" id="form-player-team" class="form-input" placeholder="7.0" oninput="updateFormResult()" style="text-align: center;">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Краткая характеристика / Цитата</label>
+      <input type="text" id="form-player-desc" class="form-input" placeholder="Напр. Олд с Вангарда, первоклассный макро-игрок">
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:10px;">
+      <button id="btn-reset-pin" class="btn btn-action" style="font-size:12px; display:none;" onclick="resetPlayerPin()">🔓 Сбросить пароль игрока</button>
+      <div style="display:flex; gap:10px; margin-left:auto;">
+        <button class="btn btn-action" onclick="closePlayerModal()">Отмена</button>
+        <button class="btn btn-gold" onclick="savePlayerForm()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА ЗАВЕРШЕНИЯ ПАРТИИ -->
+<div id="finish-match-modal" class="modal-overlay">
+  <div class="modal-window">
+    <div class="modal-header">
+      <span>🏁 Фиксация результатов войны</span>
+      <button style="background:none; border:none; color:var(--text-muted); font-size:24px; font-weight: 800; cursor:pointer;" onclick="closeFinishMatchModal()">✕</button>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Год окончания кампании</label>
+      <input type="text" id="match-duration-input" class="form-input" placeholder="Например: апрель 1943 года">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Причина завершения</label>
+      <input type="text" id="match-notes-input" class="form-input" placeholder="Например: капитуляция стран Оси">
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-top:16px;">
+      <button class="btn btn-axis" style="padding:16px; font-size:16px;" onclick="confirmMatchResult('Axis')">
+        🔴 Победа ОСИ
+      </button>
+      <button class="btn btn-allies" style="padding:16px; font-size:16px;" onclick="confirmMatchResult('Allies')">
+        🔵 Победа СОЮЗНИКОВ
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА ЛИЧНОГО ПРОФИЛЯ ИГРОКА -->
+<div id="player-profile-modal" class="modal-overlay">
+  <div class="modal-window" style="max-width: 640px;">
+    <div class="modal-header">
+      <span id="profile-modal-title">Профиль игрока</span>
+      <button style="background:none; border:none; color:var(--text-muted); font-size:24px; font-weight: 800; cursor:pointer;" onclick="closePlayerProfileModal()">✕</button>
+    </div>
+    <input type="hidden" id="profile-player-id">
+
+    <!-- ЭКРАН БЛОКИРОВКИ -->
+    <div id="profile-lock-screen">
+      <p id="profile-lock-text" style="font-size:14px; color:var(--text-secondary); margin:0; line-height:1.6;"></p>
+      <div class="form-group" style="margin-top:16px;">
+        <label class="form-label" id="profile-pin-label">Пароль (минимум 8 символов)</label>
+        <input type="password" minlength="8" id="profile-pin-input" class="form-input" placeholder="••••••••">
+      </div>
+      <div class="form-group" id="profile-pin-confirm-group" style="display:none; margin-top:12px;">
+        <label class="form-label">Повторите пароль</label>
+        <input type="password" minlength="8" id="profile-pin-confirm-input" class="form-input" placeholder="••••••••">
+      </div>
+      <p id="profile-lock-error" style="font-size:13px; color:#f87171; margin-top:10px; display:none;"></p>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px;">
+        <button class="btn btn-action" onclick="closePlayerProfileModal()">Отмена</button>
+        <button id="profile-unlock-btn" class="btn btn-gold" onclick="handlePlayerProfileUnlock()">Продолжить</button>
+      </div>
+    </div>
+
+    <!-- ЭКРАН РЕДАКТИРОВАНИЯ -->
+    <div id="profile-edit-screen" style="display:none;">
+      <div class="form-group">
+        <label class="form-label">Discord (позывной или ссылка)</label>
+        <input type="text" id="profile-discord-input" class="form-input" placeholder="Напр. username или @username">
+      </div>
+
+      <div class="form-group" style="margin-top:16px;">
+        <label class="form-label">Специализация / Любимые страны</label>
+        <div id="profile-countries-grid"></div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:20px; flex-wrap:wrap;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <button id="profile-change-pin-btn" class="btn btn-action" onclick="handleChangePin()">🔑 Сменить пароль</button>
+          <button id="profile-admin-reset-pin-btn" class="btn btn-axis" style="display:none;" onclick="resetPlayerPinFromProfile()">🔓 Сбросить пароль</button>
+        </div>
+        <div style="display:flex; gap:10px; margin-left:auto;">
+          <button class="btn btn-action" onclick="closePlayerProfileModal()">Отмена</button>
+          <button class="btn btn-gold" onclick="savePlayerProfileForm()">Сохранить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const WORKER_DB_URL = "https://hoi4-db-proxy.gomegan1975.workers.dev";
+  const PROFILE_PROXY_URL = "https://hoi4-profile-proxy.gomegan1975.workers.dev";
+  let adminKey = sessionStorage.getItem('hoi4_admin_key') || '';
+
+  function calcPlayerScore(p) {
+    const macro = Number(p.macro) || 0;
+    const micro = Number(p.micro) || 0;
+    const fleet = Number(p.fleet) || 0;
+    const team = Number(p.team != null ? p.team : 6.0);
+    return parseFloat(((macro + micro + fleet + team) / 4).toFixed(1));
+  }
+
+  function getUSSRFlagSVG() {
+    return `<svg class="country-flag-img" viewBox="0 0 40 26" xmlns="http://www.w3.org/2000/svg" title="СССР"><rect width="40" height="26" fill="#cc0000"/><g fill="#facc15"><polygon points="6.5,3.8 7.1,5.5 8.9,5.5 7.5,6.6 8,8.3 6.5,7.2 5,8.3 5.5,6.6 4.1,5.5 5.9,5.5"/><path d="M 6.8 6.8 A 3 3 0 0 1 10.2 9.8 A 3 3 0 0 1 7.2 12.8 A 3 3 0 0 1 4.2 9.8 L 5.3 9.8 A 1.9 1.9 0 0 0 7.2 11.7 A 1.9 1.9 0 0 0 9.1 9.8 A 1.9 1.9 0 0 0 6.8 7.9 Z"/><rect x="4.8" y="8.5" width="4.2" height="1.3" transform="rotate(45 6.9 9.1)"/></g></svg>`;
+  }
+
+  function getCountryFlagHtml(countryCode, countryName) {
+    if (countryCode === 'su') {
+      return getUSSRFlagSVG();
+    }
+    if (countryCode === 'general') {
+      return `<span style="font-size:16px; line-height:1; display:inline-block; width:28px; text-align:center;">🪖</span>`;
+    }
+    return `<img class="country-flag-img" src="https://flagcdn.com/w40/${countryCode.toLowerCase()}.png" alt="${escapeHtml(countryName)}" title="${escapeHtml(countryName)}">`;
+  }
+
+  const FAVORITE_COUNTRIES_LIST = [
+    { name: "Германия", code: "de" },
+    { name: "СССР", code: "su" },
+    { name: "Япония", code: "jp" },
+    { name: "США", code: "us" },
+    { name: "Италия", code: "it" },
+    { name: "Великобритания", code: "gb" },
+    { name: "Франция", code: "fr" },
+    { name: "Канада", code: "ca" },
+    { name: "Австралия", code: "au" },
+    { name: "Индия", code: "in" },
+    { name: "ЮАР", code: "za" },
+    { name: "Венгрия", code: "hu" },
+    { name: "Румыния", code: "ro" },
+    { name: "Болгария", code: "bg" },
+    { name: "Финляндия", code: "fi" }
+  ];
+
+  // Надежное асинхронное хеширование SHA-256
+  async function hashPin(pin) {
+    const msgBuffer = new TextEncoder().encode(pin);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  const SLOTS_CONFIG = {
+    no_asia: {
+      title: "Режим без Азии",
+      axis: [
+        { type: "country", country: "Германия", code: "de", role: "Лидер Оси", discordTag: ":GER:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "country", country: "Италия", code: "it", role: "Средиземноморье", discordTag: ":ITA:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Италии", parent: "Италия", discordTag: ":GER~1:" },
+        { type: "country", country: "Румыния", code: "ro", role: "Танки / Нефть", discordTag: ":ROM:" },
+        { type: "country", country: "Венгрия", code: "hu", role: "Авиация", discordTag: ":HUN:" },
+        { type: "country", code: "bg", role: "Пехота / Балканы", country: "Болгария", discordTag: ":BUL:" },
+        { type: "country", country: "Финляндия", code: "fi", role: "Северный фронт", discordTag: ":FIN:" }
+      ],
+      allies: [
+        { type: "country", country: "СССР", code: "su", role: "Лидер Коминтерна", discordTag: ":SOV:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "country", country: "Великобритания", code: "gb", role: "Лидер Союзников", discordTag: ":ENG:" },
+        { type: "country", country: "Франция", code: "fr", role: "Метрополия", discordTag: ":FRA:" },
+        { type: "country", country: "Канада", code: "ca", role: "Атлантика", discordTag: ":CAN:" },
+        { type: "country", country: "ЮАР", code: "za", role: "Танки / Африка", discordTag: ":SAF:" }
+      ]
+    },
+    asia: {
+      title: "Режим с Азией",
+      axis: [
+        { type: "country", country: "Германия", code: "de", role: "Лидер Оси", discordTag: ":GER:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Германии", parent: "Германия", discordTag: ":GER~1:" },
+        { type: "country", country: "Япония", code: "jp", role: "Тихий океан", discordTag: ":JAP:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Японии", parent: "Япония", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Японии", parent: "Япония", discordTag: ":GER~1:" },
+        { type: "country", country: "Италия", code: "it", role: "Средиземноморье", discordTag: ":ITA:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал Италии", parent: "Италия", discordTag: ":GER~1:" },
+        { type: "country", country: "Румыния", code: "ro", role: "Танки / Нефть", discordTag: ":ROM:" },
+        { type: "country", country: "Венгрия", code: "hu", role: "Авиация", discordTag: ":HUN:" },
+        { type: "country", country: "Болгария", code: "bg", role: "Пехота / Балканы", discordTag: ":BUL:" },
+        { type: "country", country: "Финляндия", code: "fi", role: "Северный фронт", discordTag: ":FIN:" }
+      ],
+      allies: [
+        { type: "country", country: "СССР", code: "su", role: "Лидер Коминтерна", discordTag: ":SOV:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал СССР", parent: "СССР", discordTag: ":GER~1:" },
+        { type: "country", country: "США", code: "us", role: "Промышленный гигант", discordTag: ":USA:" },
+        { type: "general", country: "Генерал", code: "general", role: "Генерал США", parent: "США", discordTag: ":GER~1:" },
+        { type: "country", country: "Великобритания", code: "gb", role: "Лидер Союзников", discordTag: ":ENG:" },
+        { type: "country", country: "Франция", code: "fr", role: "Метрополия", discordTag: ":FRA:" },
+        { type: "country", country: "Канада", code: "ca", role: "Атлантика", discordTag: ":CAN:" },
+        { type: "country", country: "Австралия", code: "au", role: "Тихий океан", discordTag: ":AST:" },
+        { type: "country", country: "Индия", code: "in", role: "Оборона Бирмы", discordTag: ":RAJ:" },
+        { type: "country", country: "ЮАР", code: "za", role: "Танки / Африка", discordTag: ":SAF:" }
+      ]
+    }
+  };
+
+  const INITIAL_HOI4_DATABASE = [
+    { id: "1", name: "feels.", points: 20, score: 9.4, macro: 10, micro: 8.5, fleet: 9.5, team: 9.5, iq: 9, desc: "Законный наследник.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "2", name: "Heavely", points: 20, score: 8.6, macro: 7, micro: 9.5, fleet: 8.5, team: 9.5, iq: 9.5, desc: "Канадская свинка.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "3", name: "arabius", points: 20, score: 8.4, macro: 7.5, micro: 8.5, fleet: 8.5, team: 9, iq: 8.5, desc: "Олд с Вангарда.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "4", name: "krpozk", points: 15, score: 7.6, macro: 8.5, micro: 8, fleet: 6.5, team: 7.5, iq: 8.5, desc: "Олд и один из сильнейших макро-игроков.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "5", name: "sumnir", points: 15, score: 7.5, macro: 8, micro: 5, fleet: 9, team: 8, iq: 8, desc: "Один из сильнейший игроков по флоту.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "6", name: "watcher", points: 15, score: 7.5, macro: 8, micro: 6.5, fleet: 8, team: 7.5, iq: 7, desc: "Горьковская братва.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "7", name: "Ravilchik", points: 15, score: 7.3, macro: 7, micro: 7.5, fleet: 6.5, team: 8, iq: 7.5, desc: "Чеченец.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "8", name: "Polosofast", points: 15, score: 7.0, macro: 6, micro: 7, fleet: 7.5, team: 7.5, iq: 6.5, desc: "Сводный брат Крейзед Драгона.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "9", name: "varker32", points: 15, score: 6.8, macro: 7, micro: 7.5, fleet: 6.5, team: 6, iq: 6.5, desc: "Хороший Совок, олд из Вангарда.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "10", name: "Napoleon", points: 10, score: 6.9, macro: 7.5, micro: 7, fleet: 6, team: 7, iq: 6.5, desc: "Хлебный боховец, хороший генерал.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "11", name: "Stolick", points: 10, score: 6.6, macro: 8, micro: 7, fleet: 5, team: 6.5, iq: 6.5, desc: "Легендарный Совок на моде Лариона.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "12", name: "diman_161", points: 10, score: 6.6, macro: 8, micro: 5.5, fleet: 7, team: 6, iq: 6.5, desc: "Патриот КастаВара, отличные билды мажоров.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "13", name: "NikichSG", points: 10, score: 6.3, macro: 6, micro: 6.5, fleet: 6.5, team: 6, iq: 6.5, desc: "Сильный фактион лидер.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "14", name: "OXOHIK", points: 10, score: 6.3, macro: 6, micro: 7.5, fleet: 5.5, team: 6, iq: 6.5, desc: "Живая легенда, отличные миноры.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "15", name: "Ярослав", points: 10, score: 5.0, macro: 1, micro: 6.5, fleet: 6.5, team: 6, iq: 7, desc: "Гора.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "16", name: "Vistu", points: 7, score: 4.6, macro: 4, micro: 5.5, fleet: 3.5, team: 5.5, iq: 6, desc: "Олд Каставара, отличный генерал.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "17", name: "Leclerc", points: 7, score: 4.8, macro: 4, micro: 6, fleet: 3, team: 6, iq: 5.5, desc: "Самый подшаренный генерал Италии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "18", name: "di bend", points: 7, score: 4.5, macro: 4.5, micro: 5.5, fleet: 3, team: 5, iq: 5.5, desc: "Хорошая Франция и ЮАР.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "19", name: "pufi29", points: 7, score: 4.0, macro: 1.5, micro: 6, fleet: 3, team: 5.5, iq: 6, desc: "Величайшее пузо Hearts.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "20", name: "Walli", points: 7, score: 4.3, macro: 2, micro: 6.5, fleet: 3, team: 5.5, iq: 5, desc: "Патриот Айрона, большой пулл миноров.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "21", name: "Jlomka", points: 7, score: 4.1, macro: 1, micro: 7, fleet: 3, team: 5.5, iq: 5, desc: "Хороший контроллер ост-фронта.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "22", name: "Mr.Sergei", points: 7, score: 4.0, macro: 1, micro: 6, fleet: 3, team: 6, iq: 5, desc: "Самая задроченная Канада сервера.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "23", name: "Pifor Gleto", points: 5, score: 5.4, macro: 7, micro: 5, fleet: 5, team: 4.5, iq: 4.5, desc: "Молчаливый, но обучаемый игрок.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "24", name: "Ruvpik", points: 5, score: 5.3, macro: 7, micro: 6, fleet: 3, team: 5, iq: 4, desc: "Брат-близнец Равика.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "25", name: "4CB", points: 5, score: 5.0, macro: 6.5, micro: 5, fleet: 3.5, team: 5, iq: 4.5, desc: "Самый добрый Атомоид.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "26", name: "Roman", points: 5, score: 4.8, macro: 4.5, micro: 5.5, fleet: 3.5, team: 5.5, iq: 4.5, desc: "Агент У.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "27", name: "bubris", points: 5, score: 4.6, macro: 5, micro: 5, fleet: 3, team: 5.5, iq: 4.5, desc: "Милый минор.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "28", name: "Котофей", points: 5, score: 4.3, macro: 2.5, micro: 4.5, fleet: 5.5, team: 4.5, iq: 5, desc: "Котофей попросил убрать.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "29", name: "Цифорка", points: 5, score: 3.9, macro: 1.5, micro: 5.5, fleet: 3, team: 5.5, iq: 5, desc: "Олд и отличный игрок на минорах.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "30", name: "dailydyster", points: 5, score: 4.1, macro: 4, micro: 5, fleet: 3, team: 4.5, iq: 4, desc: "Ценитель горняков на Румынии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "31", name: "Ymong", points: 5, score: 3.8, macro: 1, micro: 5, fleet: 3.5, team: 5.5, iq: 5, desc: "Отмотал пять месяцев на тюряге.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "32", name: "polux912", points: 5, score: 3.8, macro: 1, micro: 5.5, fleet: 3, team: 5.5, iq: 5, desc: "Крашер Оригиона.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "33", name: "akayo", points: 5, score: 3.9, macro: 2.5, micro: 6.5, fleet: 3, team: 3.5, iq: 4.5, desc: "Твинк Флауви.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "34", name: "Tyman", points: 5, score: 3.9, macro: 1, micro: 5.5, fleet: 3, team: 6, iq: 4.5, desc: "Чиллаут мафия, позитивный минор.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "35", name: "Dark", points: 3, score: 4.3, macro: 4, micro: 5, fleet: 3, team: 5, iq: 5, desc: "Новичок, игрок на Венгрии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "36", name: "Owl", points: 3, score: 4.1, macro: 1.5, micro: 5, fleet: 4.5, team: 5.5, iq: 4.5, desc: "Генерал Шептун 2.0.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "37", name: "Autation", points: 3, score: 3.8, macro: 1, micro: 5.5, fleet: 3, team: 5.5, iq: 5, desc: "Главный мемодел Оригиона.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "38", name: "bekgold", points: 3, score: 3.9, macro: 4, micro: 4.5, fleet: 3, team: 4, iq: 4, desc: "Молчаливый минор.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "39", name: "DeniumC", points: 3, score: 3.9, macro: 2.5, micro: 5, fleet: 3, team: 5, iq: 3.5, desc: "Новичок на Франции.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "40", name: "Zеля", points: 3, score: 3.9, macro: 4.5, micro: 4, fleet: 3, team: 4, iq: 3.5, desc: "Брат-близнец Дидило.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "41", name: "Артем", points: 3, score: 3.8, macro: 1, micro: 5, fleet: 3.5, team: 5, iq: 3.5, desc: "Неплохой генерал в Азии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "42", name: "Дебошир", points: 3, score: 3.6, macro: 1, micro: 5, fleet: 3, team: 5, iq: 4, desc: "Темная лошадка, средняя Финляндия.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "43", name: "Rus269", points: 3, score: 3.8, macro: 4, micro: 3.5, fleet: 3, team: 4.5, iq: 3, desc: "Друг Ярослава.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "44", name: "platezhy", points: 3, score: 3.6, macro: 1, micro: 5.5, fleet: 3, team: 4.5, iq: 3.5, desc: "Бургер.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "45", name: "Ayan", points: 3, score: 3.6, macro: 2.5, micro: 4, fleet: 3, team: 4.5, iq: 3.5, desc: "Средняя Болгария.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "46", name: "untermens", points: 3, score: 3.5, macro: 1, micro: 5, fleet: 3, team: 4.5, iq: 3.5, desc: "Неприличный никнейм.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "47", name: "goose8029", points: 3, score: 3.4, macro: 2.5, micro: 4.5, fleet: 3, team: 3.5, iq: 3.5, desc: "Мой брат-близнец.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "48", name: "Muffy", points: 1, score: 3.5, macro: 4, micro: 4, fleet: 3, team: 4, iq: 3.5, desc: "Друг Пифора и Самнира.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "49", name: "7e4ko", points: 1, score: 3.4, macro: 2.5, micro: 4, fleet: 3, team: 4, iq: 3.5, desc: "Новичок из 2023 года.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "50", name: "Кирилл", points: 1, score: 3.3, macro: 1, micro: 4.5, fleet: 3.5, team: 4, iq: 3.5, desc: "Средняя Румыния.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "51", name: "faaaaackyou", points: 1, score: 3.3, macro: 1, micro: 4, fleet: 3, team: 5, iq: 3.5, desc: "Средняя Финляндия.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "52", name: "Gray Wing", points: 1, score: 3.3, macro: 2.5, micro: 3.5, fleet: 3, team: 4, iq: 3.5, desc: "Новичок на Финляндии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "53", name: "Konstantin", points: 1, score: 3.3, macro: 1, micro: 4, fleet: 3, team: 4.5, iq: 3.5, desc: "Очень адекватный генерал.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "54", name: "tk.", points: 1, score: 3.1, macro: 1.5, micro: 4, fleet: 3, team: 4, iq: 3.5, desc: "Минор из Чиллаута.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "55", name: "melodelon", points: 1, score: 3.1, macro: 2.5, micro: 3.5, fleet: 3, team: 3.5, iq: 3.5, desc: "Второй новичок из 2023 года.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "56", name: "Prengot", points: 1, score: 3.0, macro: 1.5, micro: 4, fleet: 3, team: 3.5, iq: 3.5, desc: "Администратор HKS.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "57", name: "_L1nk", points: 1, score: 3.0, macro: 1.5, micro: 4, fleet: 3, team: 3.5, iq: 3.5, desc: "Лехакалер.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "58", name: "Pluton", points: 1, score: 3.0, macro: 1.5, micro: 4, fleet: 3, team: 3.5, iq: 3.5, desc: "Ген-новичок.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "59", name: "kserokz", points: 1, score: 2.9, macro: 1, micro: 3.5, fleet: 3, team: 4, iq: 3.5, desc: "Друг Гомегана.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "60", name: "FaZe", points: 1, score: 2.9, macro: 1, micro: 3.5, fleet: 3, team: 4, iq: 3.5, desc: "Братва из Ордерлайса.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "61", name: "Limbobo", points: 1, score: 2.9, macro: 1, micro: 4.5, fleet: 3, team: 3, iq: 3, desc: "Неплохой контроллер без микрофона.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "62", name: "Даниил", points: 1, score: 2.9, macro: 1, micro: 3.5, fleet: 3, team: 4, iq: 3.5, desc: "Друг ЛанаиТоп.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null },
+    { id: "63", name: "Zhao Un Ju", points: 1, score: 2.8, macro: 1, micro: 3, fleet: 3.5, team: 3.5, iq: 3, desc: "Контроллер флота на Германии.", wr: "—", wins: 0, games: 0, selected: false, discord: "", favCountries: [], pin: null }
+  ];
+
+  let players = [];
+  let matches = [];
+  let currentLobby = null;
+  let currentMode = 'no_asia';
+  let activeTier = 'all';
+  let sortCol = 'points';
+  let sortDir = -1;
+  let adminMode = Boolean(adminKey);
+  let slotAssignContext = null;
+  let draggedPlayerInfo = null;
+
+  async function loadData() {
+    const statusEl = document.getElementById('sync-status');
+    statusEl.innerHTML = '⏳ Синхронизация...';
+
+    try {
+      const headers = {};
+      if (READ_KEY) headers['X-Access-Key'] = READ_KEY;
+
+      const res = await fetch(WORKER_DB_URL); // Никакие ключи(headers) с фронтенда больше передавать не нужно!
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+
+      if (data.record && typeof data.record === 'object' && Array.isArray(data.record.players) && data.record.players.length > 0) {
+        players = data.record.players;
+        matches = Array.isArray(data.record.matches) ? data.record.matches : [];
+      } else {
+        players = JSON.parse(JSON.stringify(INITIAL_HOI4_DATABASE));
+        matches = Array.isArray(data && data.record && data.record.matches) ? data.record.matches : [];
+      }
+      statusEl.innerHTML = '🟢 База онлайн';
+    } catch (err) {
+      statusEl.innerHTML = '⚠️ Локальный режим';
+      try {
+        const localP = localStorage.getItem('hoi4_players_data');
+        players = localP ? JSON.parse(localP) : JSON.parse(JSON.stringify(INITIAL_HOI4_DATABASE));
+        const localM = localStorage.getItem('hoi4_matches_history');
+        matches = localM ? JSON.parse(localM) : [];
+      } catch (e) {
+        players = JSON.parse(JSON.stringify(INITIAL_HOI4_DATABASE));
+        matches = [];
+      }
+    }
+
+    players.forEach(p => {
+      p.score = calcPlayerScore(p);
+      p.selected = false;
+    });
+
+    document.getElementById('badge-history-count').textContent = matches.length;
+    updateAdminUI();
+    renderLeaderboardRoster();
+  }
+
+  async function saveLocal() {
+    localStorage.setItem('hoi4_players_data', JSON.stringify(players));
+    localStorage.setItem('hoi4_matches_history', JSON.stringify(matches));
+    document.getElementById('badge-history-count').textContent = matches.length;
+
+    const statusEl = document.getElementById('sync-status');
+    if (!adminKey) return;
+
+    statusEl.innerHTML = '🟡 Сохранение...';
+    try {
+      const payload = { players, matches };
+      const res = await fetch(WORKER_DB_URL, { // Запрос уходит на Воркер. Он принимает X-Master-Key из headers и отправляет данные дальше.
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Master-Key': adminKey
+        },
+        body: JSON.stringify(payload)
+      });
+      if (!res.ok) throw new Error();
+      statusEl.innerHTML = '🟢 Сохранено';
+    } catch (err) {
+      statusEl.innerHTML = '🔴 Ошибка ключа!';
+      alert('Не удалось синхронизировать с облаком. Проверьте правильность Master Key.');
+    }
+  }
+
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-roster').style.display = 'none';
+    document.getElementById('section-lobby').style.display = 'none';
+    document.getElementById('section-history').style.display = 'none';
+
+    if (tabId === 'roster') {
+      document.getElementById('tab-btn-roster').classList.add('active');
+      document.getElementById('section-roster').style.display = 'flex';
+      renderLeaderboardRoster();
+    } else if (tabId === 'lobby') {
+      document.getElementById('tab-btn-lobby').classList.add('active');
+      document.getElementById('section-lobby').style.display = 'flex';
+      if (!currentLobby) initManualFactionLobby();
+      else renderLobby();
+    } else if (tabId === 'history') {
+      document.getElementById('tab-btn-history').classList.add('active');
+      document.getElementById('section-history').style.display = 'flex';
+      renderHistory();
+    }
+  }
+
+  function setLobbyMode(mode) {
+    currentMode = mode;
+    document.getElementById('mode-btn-no-asia').classList.toggle('active', mode === 'no_asia');
+    document.getElementById('mode-btn-asia').classList.toggle('active', mode === 'asia');
+    reconfigureLobbySlots();
+  }
+
+  async function toggleAdminLogin() {
+    if (adminMode) {
+      if (confirm('Выйти из режима администратора?')) {
+        adminMode = false;
+        adminKey = '';
+        sessionStorage.removeItem('hoi4_admin_key');
+        updateAdminUI();
+        renderLeaderboardRoster();
+        renderHistory();
+      }
+    } else {
+      const pass = prompt('Введите секретный Master Key от JSONBin:');
+      if (!pass || !pass.trim()) return;
+
+      const candidateKey = pass.trim();
+
+      // --- ИСПРАВЛЕНИЕ: Строгая проверка формата ключа ---
+      // Master Key от JSONBin всегда является bcrypt-хешем (начинается с $2 и имеет длину 60 символов)
+      if (!candidateKey.startsWith('$2') || candidateKey.length !== 60) {
+        alert('Доступ запрещен: Неверный формат Master Key!');
+        return;
+      }
+      // ----------------------------------------------------
+
+      try {
+        // Мы вставили ID (6aa6da...) напрямую. Это безопасно, так как сам по себе ID не является секретом.
+        const testRes = await fetch(`https://api.jsonbin.io/v3/b/6aa6da07ac6210605ac87b0d/versions/count`, {
+          method: 'GET',
+          headers: { 'X-Master-Key': candidateKey }
+        });
+        
+        if (!testRes.ok) throw new Error();
+
+        adminKey = candidateKey;
+        sessionStorage.setItem('hoi4_admin_key', adminKey);
+        adminMode = true;
+        updateAdminUI();
+        renderLeaderboardRoster();
+        renderHistory();
+        alert('Авторизация успешна! Права администратора активированы.');
+      } catch (err) {
+        alert('Доступ запрещен: сервер отклонил введенный Master Key!');
+      }
+    }
+  }
+
+  function updateAdminUI() {
+    const btn = document.getElementById('admin-toggle-btn');
+    const addBtn = document.getElementById('btn-add-player');
+    const backupBtn = document.getElementById('btn-backup-json');
+    const importBtn = document.getElementById('btn-import-json');
+    const thActions = document.getElementById('th-actions');
+    const finishBtn = document.getElementById('btn-finish-lobby-match');
+
+    if (adminMode) {
+      btn.innerHTML = '🔓 Админ Активен';
+      btn.classList.add('active');
+      addBtn.style.display = 'inline-flex';
+      backupBtn.style.display = 'inline-flex';
+      importBtn.style.display = 'inline-flex';
+      thActions.style.display = '';
+      if (finishBtn) finishBtn.style.display = 'inline-flex';
+    } else {
+      btn.innerHTML = '🔑 Админ';
+      btn.classList.remove('active');
+      addBtn.style.display = 'none';
+      backupBtn.style.display = 'none';
+      importBtn.style.display = 'none';
+      thActions.style.display = 'none';
+      if (finishBtn) finishBtn.style.display = 'none';
+    }
+  }
+
+  function getPlayerMatchStats(playerId) {
+    let wins = 0, games = 0;
+    (matches || []).forEach(m => {
+      const inAxis = (m.axisTeam || []).some(x => x.id === playerId);
+      const inAllies = (m.alliesTeam || []).some(x => x.id === playerId);
+      if (!inAxis && !inAllies) return;
+      games++;
+      if ((inAxis && m.winner === 'Axis') || (inAllies && m.winner === 'Allies')) wins++;
+    });
+    const wr = games > 0 ? `${((wins / games) * 100).toFixed(1)}%` : '—';
+    return { wins, games, wr };
+  }
+
+  function renderLeaderboardRoster() {
+    const tbody = document.getElementById('roster-body');
+    const query = (document.getElementById('search-input').value || '').toLowerCase().trim();
+    tbody.innerHTML = '';
+
+    let visible = 0;
+    let selectedCount = 0;
+    let totalScore = 0;
+
+    applySortLeaderboard();
+
+    players.forEach(p => {
+      if (p.selected) selectedCount++;
+
+      let matchTier = true;
+      if (activeTier === '20') matchTier = (p.points === 20);
+      else if (activeTier === '15') matchTier = (p.points === 15);
+      else if (activeTier === '10') matchTier = (p.points === 10);
+      else if (activeTier === '7') matchTier = (p.points === 7);
+      else if (activeTier === '5') matchTier = (p.points === 5);
+      else if (activeTier === '3-1') matchTier = (p.points <= 3);
+
+      const matchSearch = !query || 
+        p.name.toLowerCase().includes(query) || 
+        p.desc.toLowerCase().includes(query);
+
+      if (!matchTier || !matchSearch) return;
+
+      visible++;
+      totalScore += p.score;
+
+      const tr = document.createElement('tr');
+      if (p.selected) tr.classList.add('row-selected');
+      tr.style.cursor = 'pointer';
+      tr.onclick = (e) => handleRosterRowClick(e, p.id);
+
+      let medalHtml = '';
+      if (visible === 1) medalHtml = '<span class="rank-medal rank-gold" title="1 место"></span>';
+      else if (visible === 2) medalHtml = '<span class="rank-medal rank-silver" title="2 место"></span>';
+      else if (visible === 3) medalHtml = '<span class="rank-medal rank-bronze" title="3 место"></span>';
+      else medalHtml = `<span class="rank-medal rank-other">${visible}</span>`;
+
+      const mStats = getPlayerMatchStats(p.id);
+      const wrNum = (mStats.wr !== '—') ? parseFloat(mStats.wr) : 0;
+      const wrColor = (mStats.wr !== '—' && wrNum >= 60) ? '#06b6d4' : (mStats.wr !== '—' && wrNum <= 35) ? '#ef4444' : '#f59e0b';
+
+      const actionCol = adminMode ? `
+        <td class="action-col">
+          <div style="display:flex; gap:5px; justify-content:flex-end;">
+            <button class="btn btn-action" style="padding:6px 10px; font-size:12px;" onclick="openEditPlayerModal('${p.id}')">✏️</button>
+            <button class="btn btn-axis" style="padding:6px 10px; font-size:12px;" onclick="deletePlayer('${p.id}')">🗑️</button>
+          </div>
+        </td>
+      ` : '';
+
+      tr.innerHTML = `
+        <td style="text-align:center;" class="check-col">
+          <input type="checkbox" class="custom-check" ${p.selected ? 'checked' : ''} onchange="togglePlayerCheck('${p.id}', this.checked)">
+        </td>
+        <td style="text-align:center;">${medalHtml}</td>
+        <td>
+          <span class="player-name-text">${escapeHtml(p.name)}</span>
+          <div class="player-discord-tag">🎮 ${p.discord ? escapeHtml(p.discord) : 'нет Discord'}</div>
+          ${(p.favCountries && p.favCountries.length) ? `
+            <div style="display:flex; align-items:center; gap:5px; margin-top:4px; flex-wrap:wrap;">
+              ${p.favCountries.map(fc => {
+                const c = FAVORITE_COUNTRIES_LIST.find(x => x.name === fc);
+                return c ? `<span style="transform:scale(0.85); transform-origin:left center;">${getCountryFlagHtml(c.code, c.name)}</span>` : '';
+              }).join('')}
+            </div>
+          ` : ''}
+        </td>
+        <td style="text-align:center;"><span class="tier-badge tier-${p.points}">Т${p.points}</span></td>
+        <td style="text-align:center;"><span class="score-val">${p.score.toFixed(1)}</span></td>
+        <td style="text-align:center;">
+          <div class="stat-gauge-wrap">
+            <span class="stat-pill stat-macro">${p.macro}</span>
+            <div class="stat-bar-track"><div class="stat-bar-fill stat-macro-fill" style="width:${Math.min(100, (p.macro / 10) * 100)}%;"></div></div>
+          </div>
+        </td>
+        <td style="text-align:center;">
+          <div class="stat-gauge-wrap">
+            <span class="stat-pill stat-micro">${p.micro}</span>
+            <div class="stat-bar-track"><div class="stat-bar-fill stat-micro-fill" style="width:${Math.min(100, (p.micro / 10) * 100)}%;"></div></div>
+          </div>
+        </td>
+        <td style="text-align:center;">
+          <div class="stat-gauge-wrap">
+            <span class="stat-pill stat-fleet">${p.fleet}</span>
+            <div class="stat-bar-track"><div class="stat-bar-fill stat-fleet-fill" style="width:${Math.min(100, (p.fleet / 10) * 100)}%;"></div></div>
+          </div>
+        </td>
+        <td style="text-align:center;">
+          <div class="stat-gauge-wrap">
+            <span class="stat-pill stat-team">${p.team}</span>
+            <div class="stat-bar-track"><div class="stat-bar-fill stat-team-fill" style="width:${Math.min(100, (p.team / 10) * 100)}%;"></div></div>
+          </div>
+        </td>
+        <td style="text-align:center;"><span style="font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:800; color:var(--text-secondary);">${mStats.wins}W / ${mStats.games}G</span></td>
+        <td>
+          <div class="winrate-wrap">
+            <div class="winrate-bar-bg"><div class="winrate-bar-fill" style="width:${mStats.wr !== '—' ? wrNum : 0}%;"></div></div>
+            <span style="font-family:'JetBrains Mono', monospace; font-weight:800; font-size:13px; color:${wrColor}; text-shadow:0 0 5px ${wrColor};">${mStats.wr}</span>
+          </div>
+        </td>
+        <td><div class="player-desc" title="${escapeHtml(p.desc)}">${escapeHtml(p.desc)}</div></td>
+        <td class="profile-col" style="text-align:center;">
+          <button class="btn btn-action" style="padding:6px 12px; font-size:12px;" onclick="openPlayerProfileModal('${p.id}')">${p.pin ? '🔓 Досье' : '🔗 Привязать'}</button>
+        </td>
+        ${actionCol}
+      `;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('badge-roster-count').textContent = players.length;
+    document.getElementById('stat-selected').textContent = `${selectedCount} / ${players.length}`;
+    document.getElementById('stat-count').textContent = visible;
+    document.getElementById('stat-avg').textContent = visible > 0 ? (totalScore / visible).toFixed(2) : '0.0';
+    document.getElementById('check-all').checked = (players.length > 0 && selectedCount === players.length);
+  }
+
+  function applySortLeaderboard() {
+    players.sort((a, b) => {
+      if (sortCol === 'points') return (a.points - b.points) * sortDir || (a.score - b.score) * sortDir;
+      if (sortCol === 'score') return (a.score - b.score) * sortDir || (a.points - b.points) * sortDir;
+      if (sortCol === 'name') return a.name.localeCompare(b.name) * sortDir;
+      if (sortCol === 'macro') return (a.macro - b.macro) * sortDir;
+      if (sortCol === 'micro') return (a.micro - b.micro) * sortDir;
+      if (sortCol === 'fleet') return (a.fleet - b.fleet) * sortDir;
+      if (sortCol === 'team') return (a.team - b.team) * sortDir;
+      if (sortCol === 'games') {
+        const gA = getPlayerMatchStats(a.id).games;
+        const gB = getPlayerMatchStats(b.id).games;
+        return (gA - gB) * sortDir;
+      }
+      if (sortCol === 'winrate') {
+        const wrRawA = getPlayerMatchStats(a.id).wr;
+        const wrRawB = getPlayerMatchStats(b.id).wr;
+        const wrA = wrRawA === '—' ? -1 : parseFloat(wrRawA);
+        const wrB = wrRawB === '—' ? -1 : parseFloat(wrRawB);
+        return (wrA - wrB) * sortDir;
+      }
+      return 0;
+    });
+  }
+
+  function sortLeaderboard(col) {
+    if (sortCol === col) sortDir = -sortDir;
+    else { sortCol = col; sortDir = -1; }
+    renderLeaderboardRoster();
+  }
+
+  function setTierFilter(tier, btn) {
+    activeTier = tier;
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderLeaderboardRoster();
+  }
+
+  function togglePlayerCheck(id, val) {
+    const p = players.find(x => x.id === id);
+    if (p) { p.selected = val; renderLeaderboardRoster(); saveLocal(); }
+  }
+
+  function handleRosterRowClick(e, id) {
+    if (e.target.closest('.check-col') || e.target.closest('.action-col') || e.target.closest('.profile-col')) return;
+    const p = players.find(x => x.id === id);
+    if (p) { p.selected = !p.selected; renderLeaderboardRoster(); saveLocal(); }
+  }
+
+  function toggleSelectAll(master) {
+    players.forEach(p => p.selected = master.checked);
+    renderLeaderboardRoster();
+    saveLocal();
+  }
+
+  function initManualFactionLobby() {
+    const config = SLOTS_CONFIG[currentMode];
+    const selected = players.filter(p => p.selected);
+
+    let axisSlots = JSON.parse(JSON.stringify(config.axis));
+    let alliesSlots = JSON.parse(JSON.stringify(config.allies));
+
+    axisSlots.forEach(s => s.player = null);
+    alliesSlots.forEach(s => s.player = null);
+
+    currentLobby = {
+      variantTitle: "Ручной сетап",
+      mode: currentMode,
+      axisSlots,
+      alliesSlots,
+      axisScore: 0.0,
+      alliesScore: 0.0,
+      diff: 0.0,
+      bench: [...selected]
+    };
+
+    document.getElementById('badge-lobby-active').style.display = 'inline-block';
+    renderLobby();
+    switchTab('lobby');
+  }
+
+  function reconfigureLobbySlots() {
+    const currentAssigned = currentLobby ? [
+      ...currentLobby.axisSlots.map(s => s.player).filter(Boolean),
+      ...currentLobby.alliesSlots.map(s => s.player).filter(Boolean),
+      ...currentLobby.bench
+    ] : players.filter(p => p.selected);
+
+    const seenIds = new Set();
+    const uniqueAssigned = [];
+    currentAssigned.forEach(p => {
+      if (p && !seenIds.has(p.id)) {
+        seenIds.add(p.id);
+        uniqueAssigned.push(p);
+      }
+    });
+
+    players.forEach(p => {
+      p.selected = uniqueAssigned.some(x => x.id === p.id);
+    });
+
+    initManualFactionLobby();
+  }
+
+  /* АВТОМАТИЧЕСКАЯ ЗАЩИТА ОТ ДУБЛИКАТОВ ИГРОКА В ЛОББИ */
+  function sanitizeLobbyDuplicates() {
+    if (!currentLobby) return;
+    const seenPlayerIds = new Set();
+
+    currentLobby.axisSlots.forEach(slot => {
+      if (slot.player) {
+        if (seenPlayerIds.has(slot.player.id)) {
+          slot.player = null;
+        } else {
+          seenPlayerIds.add(slot.player.id);
+        }
+      }
+    });
+
+    currentLobby.alliesSlots.forEach(slot => {
+      if (slot.player) {
+        if (seenPlayerIds.has(slot.player.id)) {
+          slot.player = null;
+        } else {
+          seenPlayerIds.add(slot.player.id);
+        }
+      }
+    });
+
+    currentLobby.bench = currentLobby.bench.filter(p => {
+      if (!p || seenPlayerIds.has(p.id)) return false;
+      seenPlayerIds.add(p.id);
+      return true;
+    });
+  }
+
+  /* DRAG AND DROP */
+  function handleDragStart(e, fromZone, idx) {
+    draggedPlayerInfo = { fromZone, idx };
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/plain', JSON.stringify({ fromZone, idx }));
+    setTimeout(() => { if (e.target) e.target.classList.add('dragging'); }, 10);
+  }
+
+  function handleDragEnd() {
+    draggedPlayerInfo = null;
+    document.querySelectorAll('.dragging').forEach(el => el.classList.remove('dragging'));
+    document.querySelectorAll('.drop-zone-active').forEach(el => el.classList.remove('drop-zone-active'));
+    document.querySelectorAll('.drag-over-item').forEach(el => el.classList.remove('drag-over-item'));
+  }
+
+  function handleItemDragOver(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.dataTransfer.dropEffect = 'move';
+    const targetItem = e.currentTarget;
+    if (!targetItem.classList.contains('drag-over-item')) {
+      document.querySelectorAll('.drag-over-item').forEach(el => el.classList.remove('drag-over-item'));
+      targetItem.classList.add('drag-over-item');
+    }
+  }
+
+  function handleItemDragLeave(e) { e.currentTarget.classList.remove('drag-over-item'); }
+
+  function handleItemDrop(e, targetZone, targetIdx) {
+    e.preventDefault();
+    e.stopPropagation();
+    document.querySelectorAll('.drag-over-item').forEach(el => el.classList.remove('drag-over-item'));
+    document.querySelectorAll('.drop-zone-active').forEach(el => el.classList.remove('drop-zone-active'));
+
+    if (!draggedPlayerInfo) return;
+    const { fromZone, idx: fromIdx } = draggedPlayerInfo;
+    if (fromZone === targetZone && fromIdx === targetIdx) return;
+
+    const getSlot = (zone, index) => zone === 'axis' ? currentLobby.axisSlots[index] : currentLobby.alliesSlots[index];
+
+    if ((fromZone === 'axis' || fromZone === 'allies') && (targetZone === 'axis' || targetZone === 'allies')) {
+      const slotFrom = getSlot(fromZone, fromIdx);
+      const slotTarget = getSlot(targetZone, targetIdx);
+      const tempPlayer = slotFrom.player;
+      slotFrom.player = slotTarget.player;
+      slotTarget.player = tempPlayer;
+      recalculateLobbyStats();
+      renderLobby();
+      return;
+    }
+
+    if (fromZone === 'bench' && (targetZone === 'axis' || targetZone === 'allies')) {
+      const benchPlayer = currentLobby.bench[fromIdx];
+      const slotTarget = getSlot(targetZone, targetIdx);
+
+      if (slotTarget.player) {
+        currentLobby.bench[fromIdx] = slotTarget.player;
+        slotTarget.player = benchPlayer;
+      } else {
+        currentLobby.bench.splice(fromIdx, 1);
+        slotTarget.player = benchPlayer;
+      }
+      recalculateLobbyStats();
+      renderLobby();
+      return;
+    }
+
+    if ((fromZone === 'axis' || fromZone === 'allies') && targetZone === 'bench') {
+      const slotFrom = getSlot(fromZone, fromIdx);
+      if (slotFrom && slotFrom.player) {
+        currentLobby.bench.push(slotFrom.player);
+        slotFrom.player = null;
+        recalculateLobbyStats();
+        renderLobby();
+      }
+      return;
+    }
+  }
+
+  function handleZoneDragOver(e) {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    const zoneEl = e.currentTarget;
+    if (!zoneEl.classList.contains('drop-zone-active')) zoneEl.classList.add('drop-zone-active');
+  }
+
+  function handleZoneDragLeave(e) { e.currentTarget.classList.remove('drop-zone-active'); }
+
+  function handleZoneDrop(e, targetZone) {
+    e.preventDefault();
+    e.currentTarget.classList.remove('drop-zone-active');
+    document.querySelectorAll('.drag-over-item').forEach(el => el.classList.remove('drag-over-item'));
+    if (!draggedPlayerInfo) return;
+
+    const { fromZone, idx } = draggedPlayerInfo;
+    if (fromZone === targetZone) return;
+
+    const getSlot = (zone, index) => zone === 'axis' ? currentLobby.axisSlots[index] : currentLobby.alliesSlots[index];
+
+    if (targetZone === 'bench') {
+      const slotFrom = getSlot(fromZone, idx);
+      if (slotFrom && slotFrom.player) {
+        currentLobby.bench.push(slotFrom.player);
+        slotFrom.player = null;
+        recalculateLobbyStats();
+        renderLobby();
+      }
+      return;
+    }
+
+    if (fromZone === 'bench' && (targetZone === 'axis' || targetZone === 'allies')) {
+      const benchPlayer = currentLobby.bench[idx];
+      const slots = targetZone === 'axis' ? currentLobby.axisSlots : currentLobby.alliesSlots;
+      const emptySlot = slots.find(s => !s.player);
+      if (emptySlot) {
+        currentLobby.bench.splice(idx, 1);
+        emptySlot.player = benchPlayer;
+        recalculateLobbyStats();
+        renderLobby();
+      }
+      return;
+    }
+  }
+
+  function attachDropZoneEvents(el, zoneName) {
+    el.ondragover = handleZoneDragOver;
+    el.ondragleave = handleZoneDragLeave;
+    el.ondrop = (e) => handleZoneDrop(e, zoneName);
+  }
+
+  function recalculateLobbyStats() {
+    if (!currentLobby) return;
+    const axisAssigned = currentLobby.axisSlots.map(s => s.player).filter(Boolean);
+    const alliesAssigned = currentLobby.alliesSlots.map(s => s.player).filter(Boolean);
+
+    currentLobby.axisScore = parseFloat(axisAssigned.reduce((s, p) => s + p.points, 0).toFixed(1));
+    currentLobby.alliesScore = parseFloat(alliesAssigned.reduce((s, p) => s + p.points, 0).toFixed(1));
+    currentLobby.diff = parseFloat(Math.abs(currentLobby.axisScore - currentLobby.alliesScore).toFixed(1));
+  }
+
+  function renderLobby() {
+    if (!currentLobby) return;
+    sanitizeLobbyDuplicates();
+    recalculateLobbyStats();
+
+    const axisContainer = document.getElementById('axis-slots-container');
+    const alliesContainer = document.getElementById('allies-slots-container');
+    axisContainer.innerHTML = '';
+    alliesContainer.innerHTML = '';
+
+    attachDropZoneEvents(axisContainer, 'axis');
+    attachDropZoneEvents(alliesContainer, 'allies');
+
+    currentLobby.axisSlots.forEach((slot, idx) => {
+      axisContainer.appendChild(createSlotRow(slot, 'axis', idx));
+    });
+
+    currentLobby.alliesSlots.forEach((slot, idx) => {
+      alliesContainer.appendChild(createSlotRow(slot, 'allies', idx));
+    });
+
+    document.getElementById('axis-total-stat').textContent = `Очки: ${currentLobby.axisScore}`;
+    document.getElementById('allies-total-stat').textContent = `Очки: ${currentLobby.alliesScore}`;
+    document.getElementById('lobby-score-diff').textContent = `Δ Разница очков: ${currentLobby.diff}`;
+
+    const benchContainer = document.getElementById('bench-container');
+    const benchSelect = document.getElementById('bench-add-select');
+    benchContainer.innerHTML = '';
+    attachDropZoneEvents(benchContainer, 'bench');
+
+    benchSelect.innerHTML = '<option value="">➕ Добавить игрока в резерв...</option>';
+
+    const assignedIds = [
+      ...currentLobby.axisSlots.map(s => s.player?.id).filter(Boolean),
+      ...currentLobby.alliesSlots.map(s => s.player?.id).filter(Boolean),
+      ...currentLobby.bench.map(p => p.id)
+    ];
+
+    players.filter(p => !assignedIds.includes(p.id)).forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.id;
+      opt.textContent = `${p.name} (Тир ${p.points})`;
+      benchSelect.appendChild(opt);
+    });
+
+    document.getElementById('bench-count').textContent = `(${currentLobby.bench.length})`;
+    currentLobby.bench.forEach((p, idx) => {
+      const b = document.createElement('div');
+      b.className = 'bench-badge';
+      b.draggable = true;
+
+      b.ondragstart = (e) => handleDragStart(e, 'bench', idx);
+      b.ondragend = handleDragEnd;
+      b.ondragover = handleItemDragOver;
+      b.ondragleave = handleItemDragLeave;
+      b.ondrop = (e) => handleItemDrop(e, 'bench', idx);
+
+      b.innerHTML = `
+        <span class="drag-handle">⠿</span>
+        <span style="font-weight:700;">${escapeHtml(p.name)}</span>
+        <span class="tier-badge tier-${p.points}">Т${p.points}</span>
+        <button class="btn btn-axis" style="padding:4px 8px; font-size:11px;" onclick="assignBenchToSlot(${idx}, 'axis')">В Ось</button>
+        <button class="btn btn-allies" style="padding:4px 8px; font-size:11px;" onclick="assignBenchToSlot(${idx}, 'allies')">В Союзники</button>
+        <button style="background:none; border:none; color:#ef4444; font-size:16px; cursor:pointer;" onclick="removeBenchPlayer(${idx})">✕</button>
+      `;
+      benchContainer.appendChild(b);
+    });
+  }
+
+  function createSlotRow(slot, faction, idx) {
+    const row = document.createElement('div');
+    row.className = `slot-row ${slot.type === 'general' ? 'is-general' : ''}`;
+    row.draggable = true;
+
+    row.ondragstart = (e) => handleDragStart(e, faction, idx);
+    row.ondragend = handleDragEnd;
+    row.ondragover = handleItemDragOver;
+    row.ondragleave = handleItemDragLeave;
+    row.ondrop = (e) => handleItemDrop(e, faction, idx);
+
+    const p = slot.player;
+    const playerHtml = p ? `
+      <button class="player-slot-btn" onclick="openSlotPickModal('${faction}', ${idx})">
+        <span>${escapeHtml(p.name)}</span>
+        <span class="tier-badge tier-${p.points}">Т${p.points}</span>
+      </button>
+    ` : `
+      <button class="player-slot-btn" style="border-style:dashed; opacity:0.8; color:var(--text-secondary);" onclick="openSlotPickModal('${faction}', ${idx})">
+        ➕ Назначить игрока
+      </button>
+    `;
+
+    row.innerHTML = `
+      <div class="slot-country-tag">
+        <span class="drag-handle">⠿</span>
+        ${getCountryFlagHtml(slot.code, slot.country)}
+        <div>
+          <div style="color:${slot.type === 'general' ? '#bae6fd' : '#f8fafc'};">
+            ${slot.country}
+          </div>
+          <div style="font-size:10px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;">${slot.role}</div>
+        </div>
+      </div>
+      <div class="slot-player-info">${playerHtml}</div>
+      <div>
+        ${p ? `<button class="btn btn-action" style="padding:4px 10px; font-size:12px;" onclick="vacateSlot('${faction}', ${idx})" title="Отправить в резерв">🛋️</button>` : ''}
+      </div>
+    `;
+    return row;
+  }
+
+  function vacateSlot(faction, idx) {
+    const slots = faction === 'axis' ? currentLobby.axisSlots : currentLobby.alliesSlots;
+    const p = slots[idx].player;
+    if (p) {
+      slots[idx].player = null;
+      currentLobby.bench.push(p);
+      recalculateLobbyStats();
+      renderLobby();
+    }
+  }
+
+  function assignBenchToSlot(benchIdx, faction) {
+    const [p] = currentLobby.bench.splice(benchIdx, 1);
+    const slots = faction === 'axis' ? currentLobby.axisSlots : currentLobby.alliesSlots;
+    const emptySlot = slots.find(s => !s.player);
+    if (emptySlot) {
+      emptySlot.player = p;
+    } else {
+      if (slots[slots.length - 1].player) {
+        currentLobby.bench.push(slots[slots.length - 1].player);
+      }
+      slots[slots.length - 1].player = p;
+    }
+    recalculateLobbyStats();
+    renderLobby();
+  }
+
+  function removeBenchPlayer(idx) {
+    currentLobby.bench.splice(idx, 1);
+    renderLobby();
+  }
+  function removeBenchPlayer(idx) {
+    currentLobby.bench.splice(idx, 1);
+    renderLobby();
+  }
+
+  /* --- НОВАЯ ФУНКЦИЯ ДЛЯ ОЧИСТКИ ВСЕГО РЕЗЕРВА --- */
+  function clearBench() {
+    if (!currentLobby || currentLobby.bench.length === 0) return; // Если лобби нет или резерв уже пуст — ничего не делаем
+    
+    if (confirm('Вы уверены, что хотите удалить всех бойцов из резерва? Они будут убраны из лобби, но останутся в общей базе.')) {
+      currentLobby.bench = []; // Полностью очищаем массив резерва
+      renderLobby(); // Обновляем интерфейс
+    }
+  }
+
+  function handleAddPlayerToBench(sel) {
+    const id = sel.value;
+    if (!id) return;
+    const p = players.find(x => x.id === id);
+    if (p) {
+      const inAxis = currentLobby.axisSlots.some(s => s.player && s.player.id === id);
+      const inAllies = currentLobby.alliesSlots.some(s => s.player && s.player.id === id);
+      const inBench = currentLobby.bench.some(b => b.id === id);
+      if (!inAxis && !inAllies && !inBench) {
+        currentLobby.bench.push(p);
+        renderLobby();
+      }
+    }
+    sel.value = "";
+  }
+
+  function openSlotPickModal(faction, slotIndex) {
+    slotAssignContext = { faction, slotIndex };
+    const slots = faction === 'axis' ? currentLobby.axisSlots : currentLobby.alliesSlots;
+    const targetSlot = slots[slotIndex];
+    document.getElementById('slot-modal-title').innerHTML = `
+      ${getCountryFlagHtml(targetSlot.code, targetSlot.country)}
+      <span style="margin-left:8px;">${targetSlot.country} (${targetSlot.role}) — Назначение</span>
+    `;
+    document.getElementById('slot-player-search').value = '';
+    renderSlotPlayerList();
+    document.getElementById('slot-pick-modal').style.display = 'flex';
+  }
+
+  function closeSlotPickModal() {
+    document.getElementById('slot-pick-modal').style.display = 'none';
+  }
+
+  /* РЕНДЕР СПИСКА БОЙЦОВ БЕЗ ВОЗМОЖНОСТИ ДУБЛИРОВАНИЯ */
+  function renderSlotPlayerList() {
+    const list = document.getElementById('slot-players-list');
+    const query = (document.getElementById('slot-player-search').value || '').toLowerCase().trim();
+    list.innerHTML = '';
+
+    if (!currentLobby || !slotAssignContext) return;
+
+    const occupiedMap = new Map();
+    currentLobby.axisSlots.forEach((s, idx) => {
+      if (s.player && !(slotAssignContext.faction === 'axis' && slotAssignContext.slotIndex === idx)) {
+        occupiedMap.set(s.player.id, `Ось • ${s.country} (${s.role})`);
+      }
+    });
+    currentLobby.alliesSlots.forEach((s, idx) => {
+      if (s.player && !(slotAssignContext.faction === 'allies' && slotAssignContext.slotIndex === idx)) {
+        occupiedMap.set(s.player.id, `Союзники • ${s.country} (${s.role})`);
+      }
+    });
+
+    const benchSet = new Set(currentLobby.bench.map(b => b.id));
+    const filtered = players.filter(p => !query || p.name.toLowerCase().includes(query));
+    const available = [];
+    const occupied = [];
+
+    filtered.forEach(p => {
+      if (occupiedMap.has(p.id)) {
+        occupied.push({ player: p, roleText: occupiedMap.get(p.id) });
+      } else {
+        available.push(p);
+      }
+    });
+
+    if (available.length === 0 && occupied.length === 0) {
+      list.innerHTML = `<div style="padding:16px; text-align:center; color:var(--text-muted); font-size:14px;">Свободные бойцы не найдены</div>`;
+      return;
+    }
+
+    available.forEach(p => {
+      const isBench = benchSet.has(p.id);
+      const item = document.createElement('div');
+      item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.5); padding:10px 14px; border-radius:12px; cursor:pointer; border:2px solid rgba(255,255,255,0.05); transition:all 0.15s ease;";
+      item.onmouseover = () => { item.style.background = "rgba(16, 185, 129, 0.15)"; item.style.borderColor = "var(--aurora-green)"; };
+      item.onmouseout = () => { item.style.background = "rgba(0,0,0,0.5)"; item.style.borderColor = "rgba(255,255,255,0.05)"; };
+      item.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span style="font-weight:700; color:#fff; font-size: 15px;">${escapeHtml(p.name)}</span>
+          <span class="tier-badge tier-${p.points}">Т${p.points}</span>
+          ${isBench ? '<span style="font-size:11px; color:var(--hud-cyan); background:rgba(56,189,248,0.15); padding:3px 8px; border-radius:6px; font-weight:700; border:1px solid var(--hud-cyan);">в резерве</span>' : ''}
+        </div>
+        <div style="font-size:12px; color:var(--text-secondary); font-family:'JetBrains Mono', monospace;">
+          🏭 ${p.macro} | 🎯 ${p.micro} | ⚓ ${p.fleet}
+        </div>
+      `;
+      item.onclick = () => {
+        const slots = slotAssignContext.faction === 'axis' ? currentLobby.axisSlots : currentLobby.alliesSlots;
+        const targetSlot = slots[slotAssignContext.slotIndex];
+
+        if (targetSlot.player && targetSlot.player.id !== p.id) {
+          currentLobby.bench.push(targetSlot.player);
+        }
+
+        const bIdx = currentLobby.bench.findIndex(b => b.id === p.id);
+        if (bIdx !== -1) {
+          currentLobby.bench.splice(bIdx, 1);
+        }
+
+        targetSlot.player = p;
+        closeSlotPickModal();
+        recalculateLobbyStats();
+        renderLobby();
+      };
+      list.appendChild(item);
+    });
+
+    if (query && occupied.length > 0) {
+      const header = document.createElement('div');
+      header.style.cssText = "font-size:12px; color:var(--text-muted); text-transform:uppercase; font-family:'Rajdhani', sans-serif; font-weight:800; margin-top:10px; padding:0 6px;";
+      header.textContent = "Уже в рассаде (недоступны):";
+      list.appendChild(header);
+
+      occupied.forEach(({ player: p, roleText }) => {
+        const item = document.createElement('div');
+        item.style.cssText = "display:flex; justify-content:space-between; align-items:center; background:rgba(217,70,239,0.05); padding:10px 14px; border-radius:12px; border:2px dashed rgba(217,70,239,0.3); opacity:0.6; cursor:not-allowed;";
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-weight:700; color:#cbd5e1; font-size: 15px;">${escapeHtml(p.name)}</span>
+            <span class="tier-badge tier-${p.points}" style="opacity:0.7;">Т${p.points}</span>
+          </div>
+          <div style="font-size:11px; color:#d946ef; font-family:'JetBrains Mono', monospace; text-shadow:0 0 5px rgba(217,70,239,0.5);">
+            ⛔ ${escapeHtml(roleText)}
+          </div>
+        `;
+        list.appendChild(item);
+      });
+    }
+  }
+
+  function copyLobbyToDiscord() {
+    if (!currentLobby) return;
+    const isAsia = currentMode === 'asia';
+    const dateStr = new Date().toLocaleDateString('ru-RU');
+    const headerEmoji = isAsia ? '🧑‍🌾' : '🍓';
+
+    let text = `${headerEmoji} **Игра ${dateStr}, режим ${isAsia ? 'с Азией' : 'без Азии'}** ${headerEmoji}\n\n`;
+
+    text += `**Страны Оси:**\n`;
+    currentLobby.axisSlots.forEach(s => {
+      const pName = s.player ? `@${s.player.name}` : '_свободно_';
+      if (s.type === 'general') {
+        text += `  :GER~1: Генерал: ${pName}\n`;
+      } else {
+        text += `${s.discordTag} ${s.country}: ${pName}\n`;
+      }
+    });
+
+    text += `\n**Страны Союзников:**\n`;
+    currentLobby.alliesSlots.forEach(s => {
+      const pName = s.player ? `@${s.player.name}` : '_свободно_';
+      if (s.type === 'general') {
+        text += `  :GER~1: Генерал: ${pName}\n`;
+      } else {
+        text += `${s.discordTag} ${s.country}: ${pName}\n`;
+      }
+    });
+
+    navigator.clipboard.writeText(text).then(() => {
+      alert(`Составы с серверными значками скопированы для Discord!`);
+    });
+  }
+
+  function openFinishMatchModal() {
+    if (!adminMode) { alert('Только администратор может завершить матч!'); return; }
+    if (!currentLobby) { alert('Лобби еще не создано!'); return; }
+    document.getElementById('finish-match-modal').style.display = 'flex';
+  }
+  function closeFinishMatchModal() {
+    document.getElementById('finish-match-modal').style.display = 'none';
+  }
+
+  function confirmMatchResult(winner) {
+    const dur = document.getElementById('match-duration-input').value.trim() || 'апрель 1943 года';
+    const notes = document.getElementById('match-notes-input').value.trim() || 'капитуляция';
+
+    const matchRecord = {
+      id: "hist-" + Date.now(),
+      date: new Date().toLocaleDateString('ru-RU'),
+      mode: currentMode === 'asia' ? 'с Азией' : 'без Азии',
+      winner: winner,
+      duration: dur,
+      notes: notes,
+      diff: currentLobby.diff,
+      axisTeam: currentLobby.axisSlots.map(s => ({
+        country: s.country,
+        role: s.role,
+        id: s.player?.id,
+        name: s.player?.name,
+        score: s.player?.score
+      })),
+      alliesTeam: currentLobby.alliesSlots.map(s => ({
+        country: s.country,
+        role: s.role,
+        id: s.player?.id,
+        name: s.player?.name,
+        score: s.player?.score
+      }))
+    };
+
+    matches.unshift(matchRecord);
+    closeFinishMatchModal();
+    saveLocal();
+    switchTab('history');
+  }
+
+  function renderHistory() {
+    const container = document.getElementById('history-container');
+    container.innerHTML = '';
+    if (matches.length === 0) {
+      container.innerHTML = '<div style="padding:28px; text-align:center; color:var(--text-muted); font-family:\'JetBrains Mono\', monospace;">Архив пока пуст. Завершите первую кампанию в лобби.</div>';
+      return;
+    }
+
+    matches.forEach((m, index) => {
+      const matchId = m.id || "hist-old-" + index; 
+      
+      const card = document.createElement('div');
+      card.style.cssText = "background:rgba(13,19,41,0.6); border:var(--border-chunky); border-radius:16px; padding:18px; box-shadow:var(--shadow-card); cursor:pointer; transition:all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select:none;";
+      
+      card.onmouseover = () => { card.style.transform = "translateY(-2px)"; card.style.boxShadow = "0 10px 0 rgba(0,0,0,0.3)"; card.style.background = "rgba(22,31,62,0.8)"; };
+      card.onmouseout = () => { card.style.transform = "translateY(0)"; card.style.boxShadow = "var(--shadow-card)"; card.style.background = "rgba(13,19,41,0.6)"; };
+
+      const isAxis = m.winner === 'Axis';
+
+      const axisTeamHtml = (m.axisTeam || []).map(p => `
+        <div style="display:flex; justify-content:space-between; font-size:13px; border-bottom:1px solid rgba(245,158,11,0.15); padding:6px 0;">
+          <span style="color:#f8fafc;">${escapeHtml(p.country)} <span style="color:var(--text-muted); font-size:10px;">(${escapeHtml(p.role)})</span></span>
+          <strong style="color:var(--axis-border);">${p.name ? escapeHtml(p.name) : '<span style="color:var(--text-muted); font-weight:normal;">Свободно</span>'}</strong>
+        </div>
+      `).join('');
+
+      const alliesTeamHtml = (m.alliesTeam || []).map(p => `
+        <div style="display:flex; justify-content:space-between; font-size:13px; border-bottom:1px solid rgba(56,189,248,0.15); padding:6px 0;">
+          <span style="color:#f8fafc;">${escapeHtml(p.country)} <span style="color:var(--text-muted); font-size:10px;">(${escapeHtml(p.role)})</span></span>
+          <strong style="color:#7dd3fc;">${p.name ? escapeHtml(p.name) : '<span style="color:var(--text-muted); font-weight:normal;">Свободно</span>'}</strong>
+        </div>
+      `).join('');
+
+      // Генерируем кнопку удаления только для Админа
+      const deleteBtnHtml = adminMode ? 
+        `<button class="btn btn-axis" style="padding:6px 12px; font-size:12px;" onclick="event.stopPropagation(); deleteMatch(${index})" title="Удалить запись">🗑️</button>` 
+        : '';
+
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+            <span style="font-family:'Oswald', sans-serif; font-weight:800; padding:8px 16px; border-radius:8px; text-transform:uppercase; font-size:14px; background:${isAxis ? 'var(--axis-bg)' : 'var(--allies-bg)'}; color:${isAxis ? '#f0abfc' : '#a5f3fc'}; border:2px solid ${isAxis ? 'var(--axis-border)' : 'var(--allies-border)'}; box-shadow:0 3px 0 rgba(0,0,0,0.3); letter-spacing:1px;">
+              ${isAxis ? '🔴 ПОБЕДА ОСИ' : '🔵 ПОБЕДА СОЮЗНИКОВ'} (${escapeHtml(m.mode)})
+            </span>
+            
+            <button class="btn btn-action" style="padding:6px 12px; font-size:12px;" onclick="event.stopPropagation(); copyMatchResultToDiscord(${index})">📋 Для Discord</button>
+            ${deleteBtnHtml}
+          </div>
+
+          <span style="font-size:13px; color:var(--hud-cyan); font-family:'JetBrains Mono', monospace; text-shadow:0 0 5px var(--hud-cyan-glow);">
+            📅 ${m.date} | ⏱️ ${escapeHtml(m.duration)} 
+            <span id="chevron-${matchId}" style="display:inline-block; transition:transform 0.3s ease; margin-left:6px; color:#fff;">▼</span>
+          </span>
+        </div>
+        <div style="font-size:14px; color:#cbd5e1; line-height:1.6; border-left:4px solid var(--brass-gold); padding-left:14px; margin-top:12px; background:rgba(245,158,11,0.05); padding-top:8px; padding-bottom:8px; border-radius: 0 8px 8px 0;">
+          📝 <i>${escapeHtml(m.notes)}</i>
+        </div>
+
+        <div id="details-${matchId}" style="display:none; margin-top:16px; border-top:2px dashed rgba(255,255,255,0.1); padding-top:16px; flex-wrap:wrap; gap:16px;">
+          <div style="flex: 1 1 280px; background:rgba(185, 28, 28, 0.1); border:1px solid rgba(245, 158, 11, 0.3); border-radius:12px; padding:12px;">
+            <div style="text-align:center; font-family:'Oswald', sans-serif; font-weight:700; color:#fca5a5; margin-bottom:8px; border-bottom:2px solid rgba(245, 158, 11, 0.3); padding-bottom:6px; letter-spacing:1px;">🔴 СОСТАВ ОСИ</div>
+            ${axisTeamHtml}
+          </div>
+          <div style="flex: 1 1 280px; background:rgba(3, 105, 161, 0.1); border:1px solid rgba(56, 189, 248, 0.3); border-radius:12px; padding:12px;">
+            <div style="text-align:center; font-family:'Oswald', sans-serif; font-weight:700; color:#bae6fd; margin-bottom:8px; border-bottom:2px solid rgba(56, 189, 248, 0.3); padding-bottom:6px; letter-spacing:1px;">🔵 СОСТАВ СОЮЗНИКОВ</div>
+            ${alliesTeamHtml}
+          </div>
+        </div>
+      `;
+
+      card.onclick = () => {
+        const detailsBox = document.getElementById(`details-${matchId}`);
+        const chevronIcon = document.getElementById(`chevron-${matchId}`);
+        
+        if (detailsBox.style.display === 'none') {
+          detailsBox.style.display = 'flex';
+          chevronIcon.style.transform = 'rotate(180deg)'; 
+          card.style.borderColor = 'var(--hud-cyan)';     
+        } else {
+          detailsBox.style.display = 'none';
+          chevronIcon.style.transform = 'rotate(0deg)';   
+          card.style.borderColor = 'rgba(255, 255, 255, 0.12)'; 
+        }
+      };
+
+      container.appendChild(card);
+    });
+  }
+
+  function copyMatchResultToDiscord(matchIndex) {
+    const m = matches[matchIndex];
+    if (!m) return;
+
+    const isAsia = m.mode.includes('Азией');
+    const headerEmoji = '🐸'; // Задаем эмодзи для заголовка
+
+    // Шапка сообщения
+    let text = `${headerEmoji} **Игра ${m.date}, режим ${m.mode}** ${headerEmoji}\n\n`;
+    
+    // Формируем текст итога. 
+    // Если вбить "августе 1943 года" и "капитуляцией СССР", получится идеальное предложение.
+    text += `**Игра завершилась в ${m.duration} ${m.notes}.**\n\n`;
+
+    // Функция для поиска серверного эмодзи страны
+    const getConfigTag = (country, isAxis) => {
+      const slots = isAxis ? SLOTS_CONFIG[isAsia ? 'asia' : 'no_asia'].axis : SLOTS_CONFIG[isAsia ? 'asia' : 'no_asia'].allies;
+      const slot = slots.find(s => s.country === country && s.type !== 'general');
+      return slot ? slot.discordTag : '🏳️';
+    };
+
+    // Функция для получения Discord пинга (если привязан) или никнейма
+    const getPlayerPing = (id, fallbackName) => {
+      if (!id) return '<span style="color:var(--text-muted); font-weight:normal;">_свободно_</span>';
+      const p = players.find(x => x.id === id);
+      if (p && p.discord) {
+        // Если указали <@id> — оставляем, если просто ник — добавляем @
+        return p.discord.startsWith('<@') ? p.discord : `@${p.discord.replace('@', '')}`;
+      }
+      return fallbackName ? `@${fallbackName}` : '_свободно_';
+    };
+
+    // --- Сборка состава ОСИ ---
+    text += `**Страны Оси:**\n`;
+    (m.axisTeam || []).forEach(s => {
+      const isGen = s.role && s.role.includes('Генерал');
+      const ping = getPlayerPing(s.id, s.name);
+      if (isGen) {
+        text += `  🪖 Генерал: ${ping}\n`;
+      } else {
+        text += `${getConfigTag(s.country, true)} ${s.country}: ${ping}\n`;
+      }
+    });
+
+    // --- Сборка состава СОЮЗНИКОВ ---
+    text += `\n**Страны Союзников:**\n`;
+    (m.alliesTeam || []).forEach(s => {
+      const isGen = s.role && s.role.includes('Генерал');
+      const ping = getPlayerPing(s.id, s.name);
+      if (isGen) {
+        text += `  🪖 Генерал: ${ping}\n`;
+      } else {
+        text += `${getConfigTag(s.country, false)} ${s.country}: ${ping}\n`;
+      }
+    });
+
+    // Копируем в буфер обмена
+    navigator.clipboard.writeText(text.replace(/<[^>]*>?/gm, '')).then(() => {
+      alert('Итоговый результат матча скопирован для Discord!');
+    });
+  }
+
+  /* --- УДАЛЕНИЕ МАТЧА ИЗ АРХИВА --- */
+  function deleteMatch(index) {
+    if (!adminMode) {
+      alert('Удалять матчи может только администратор!');
+      return;
+    }
+    
+    if (confirm('Вы уверены, что хотите навсегда удалить эту кампанию из архива?')) {
+      matches.splice(index, 1); // Удаляем матч из массива
+      saveLocal(); // Сохраняем изменения в базу данных
+      renderHistory(); // Перерисовываем архив
+    }
+  }
+
+  function updateFormResult() {
+    const macro = parseFloat(document.getElementById('form-player-macro').value) || 0;
+    const micro = parseFloat(document.getElementById('form-player-micro').value) || 0;
+    const fleet = parseFloat(document.getElementById('form-player-fleet').value) || 0;
+    const team = parseFloat(document.getElementById('form-player-team').value) || 0;
+    const avg = (macro + micro + fleet + team) / 4;
+    document.getElementById('form-player-result').value = avg > 0 ? avg.toFixed(1) : '0.0';
+  }
+
+  function openAddPlayerModal() {
+    document.getElementById('player-modal-title').textContent = 'Добавить нового игрока';
+    document.getElementById('form-player-id').value = '';
+    document.getElementById('form-player-name').value = '';
+    document.getElementById('form-player-points').value = '10';
+    document.getElementById('form-player-macro').value = '6.0';
+    document.getElementById('form-player-micro').value = '6.0';
+    document.getElementById('form-player-fleet').value = '5.0';
+    document.getElementById('form-player-team').value = '6.0';
+    document.getElementById('form-player-desc').value = '';
+    document.getElementById('btn-reset-pin').style.display = 'none';
+    updateFormResult();
+    document.getElementById('player-modal').style.display = 'flex';
+  }
+
+  function openEditPlayerModal(id) {
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('player-modal-title').textContent = `Редактировать: ${p.name}`;
+    document.getElementById('form-player-id').value = p.id;
+    document.getElementById('form-player-name').value = p.name;
+    document.getElementById('form-player-points').value = p.points;
+    document.getElementById('form-player-macro').value = p.macro;
+    document.getElementById('form-player-micro').value = p.micro;
+    document.getElementById('form-player-fleet').value = p.fleet;
+    document.getElementById('form-player-team').value = p.team != null ? p.team : 6.0;
+    document.getElementById('form-player-desc').value = p.desc;
+    document.getElementById('btn-reset-pin').style.display = p.pin ? 'inline-block' : 'none';
+    updateFormResult();
+    document.getElementById('player-modal').style.display = 'flex';
+  }
+
+  function closePlayerModal() {
+    document.getElementById('player-modal').style.display = 'none';
+  }
+
+  /* ЛИЧНЫЙ ПРОФИЛЬ ИГРОКА */
+  let profileModalMode = null;
+  let profileSessionPinHash = null;
+  let profileBusy = false;
+
+  async function callProfileProxy(payload) {
+    const res = await fetch(PROFILE_PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || 'Не удалось связаться с сервером профилей.');
+    return data;
+  }
+
+  function openPlayerProfileModal(id) {
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+
+    profileSessionPinHash = null;
+    document.getElementById('profile-player-id').value = id;
+    document.getElementById('profile-modal-title').textContent = `Профиль игрока: ${p.name}`;
+    document.getElementById('profile-pin-input').value = '';
+    document.getElementById('profile-pin-confirm-input').value = '';
+    document.getElementById('profile-lock-error').style.display = 'none';
+
+    if (adminMode) {
+      showProfileEditScreen(p);
+      document.getElementById('player-profile-modal').style.display = 'flex';
+      return;
+    }
+
+    document.getElementById('profile-edit-screen').style.display = 'none';
+    document.getElementById('profile-lock-screen').style.display = 'block';
+
+    if (p.pin) {
+      profileModalMode = 'unlock';
+      document.getElementById('profile-lock-text').textContent = `Введите секретный пароль игрока «${p.name}», чтобы получить доступ к изменению Discord и любимых стран.`;
+      document.getElementById('profile-pin-label').textContent = 'Пароль доступа';
+      document.getElementById('profile-pin-confirm-group').style.display = 'none';
+      document.getElementById('profile-unlock-btn').innerHTML = 'Войти в досье';
+    } else {
+      profileModalMode = 'create';
+      document.getElementById('profile-lock-text').textContent = `Этот профиль ещё не защищён паролем. Придумайте надёжный код (минимум 8 символов), чтобы привязать досье к себе.`;
+      document.getElementById('profile-pin-label').textContent = 'Придумайте пароль (мин. 8 символов)';
+      document.getElementById('profile-pin-confirm-group').style.display = 'block';
+      document.getElementById('profile-unlock-btn').innerHTML = 'Привязать досье';
+    }
+
+    document.getElementById('player-profile-modal').style.display = 'flex';
+  }
+
+  async function handlePlayerProfileUnlock() {
+    if (profileBusy) return;
+    const id = document.getElementById('profile-player-id').value;
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+
+    const errEl = document.getElementById('profile-lock-error');
+    errEl.style.display = 'none';
+    const pin = document.getElementById('profile-pin-input').value;
+    const btn = document.getElementById('profile-unlock-btn');
+
+    const showErr = (msg) => { errEl.textContent = msg; errEl.style.display = 'block'; };
+
+    if (profileModalMode === 'create') {
+      // --- ДОБАВЛЕНА ПРОВЕРКА: 1 БРАУЗЕР = 1 ПРОФИЛЬ ---
+      const alreadyClaimed = localStorage.getItem('hoi4_claimed_player_id');
+      if (alreadyClaimed && alreadyClaimed !== id && !adminMode) {
+        return showErr('Вы уже привязали к себе другого игрока! Один пользователь может владеть только одним.');
+      }
+      // ------------------------------------------------
+
+      const confirmPin = document.getElementById('profile-pin-confirm-input').value;
+      if (pin.length < 8) return showErr('Пароль должен быть не короче 8 символов.');
+      if (pin !== confirmPin) return showErr('Пароли не совпадают.');
+
+      const newHash = await hashPin(pin);
+      profileBusy = true; btn.disabled = true; btn.innerHTML = 'Привязка...';
+      try {
+        if (PROFILE_PROXY_URL) {
+          await callProfileProxy({ playerId: id, action: 'claim', newPinHash: newHash });
+        }
+        p.pin = newHash;
+        profileSessionPinHash = newHash;
+        
+        // --- ЗАПОМИНАЕМ, ЧТО ПОЛЬЗОВАТЕЛЬ УЖЕ ПРИВЯЗАЛ ПРОФИЛЬ ---
+        if (!adminMode) {
+          localStorage.setItem('hoi4_claimed_player_id', id);
+        }
+        // ---------------------------------------------------------
+
+        saveLocal();
+        renderLeaderboardRoster();
+        showProfileEditScreen(p);
+      } catch (err) {
+        showErr(err.message);
+      } finally {
+        profileBusy = false; btn.disabled = false; btn.innerHTML = 'Привязать досье';
+      }
+    } else {
+      const hash = await hashPin(pin); // <--- Добавили await!
+      profileBusy = true; btn.disabled = true; btn.innerHTML = 'Проверка...';
+      try {
+        if (PROFILE_PROXY_URL) {
+          await callProfileProxy({ playerId: id, action: 'update', currentPinHash: hash });
+        } else if (hash !== p.pin) {
+          throw new Error('Неверный пароль доступа.');
+        }
+        profileSessionPinHash = hash;
+        showProfileEditScreen(p);
+      } catch (err) {
+        showErr(err.message);
+      } finally {
+        profileBusy = false; btn.disabled = false; btn.innerHTML = 'Войти в досье';
+      }
+    }
+  }
+
+  function showProfileEditScreen(p) {
+    document.getElementById('profile-lock-screen').style.display = 'none';
+    document.getElementById('profile-edit-screen').style.display = 'block';
+    document.getElementById('profile-discord-input').value = p.discord || '';
+    renderProfileCountriesGrid(p);
+
+    const resetBtn = document.getElementById('profile-admin-reset-pin-btn');
+    if (resetBtn) {
+      resetBtn.style.display = (adminMode && p.pin) ? 'inline-flex' : 'none';
+    }
+  }
+
+  function renderProfileCountriesGrid(p) {
+    const grid = document.getElementById('profile-countries-grid');
+    grid.innerHTML = '';
+    const fav = new Set(p.favCountries || []);
+    FAVORITE_COUNTRIES_LIST.forEach(c => {
+      const isChecked = fav.has(c.name);
+      const label = document.createElement('label');
+      label.className = `country-select-chip ${isChecked ? 'active' : ''}`;
+      label.innerHTML = `
+        <input type="checkbox" value="${escapeHtml(c.name)}" ${isChecked ? 'checked' : ''} style="accent-color:var(--hud-cyan); cursor:pointer;" onchange="this.parentElement.classList.toggle('active', this.checked)">
+        <span style="display:inline-flex; align-items:center;">${getCountryFlagHtml(c.code, c.name)}</span>
+        <span class="country-name-label">${escapeHtml(c.name)}</span>
+      `;
+      grid.appendChild(label);
+    });
+  }
+
+  async function savePlayerProfileForm() {
+    if (profileBusy) return;
+    const id = document.getElementById('profile-player-id').value;
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+
+    const discord = document.getElementById('profile-discord-input').value.trim();
+    const favCountries = [...document.querySelectorAll('#profile-countries-grid input[type=checkbox]:checked')].map(i => i.value);
+
+    profileBusy = true;
+    try {
+      if (adminMode) {
+        p.discord = discord;
+        p.favCountries = favCountries;
+        await saveLocal();
+        renderLeaderboardRoster();
+        closePlayerProfileModal();
+        return;
+      }
+
+      if (PROFILE_PROXY_URL) {
+        await callProfileProxy({
+          playerId: id, action: 'update',
+          currentPinHash: profileSessionPinHash,
+          discord, favCountries
+        });
+      }
+      p.discord = discord;
+      p.favCountries = favCountries;
+      saveLocal();
+      renderLeaderboardRoster();
+      closePlayerProfileModal();
+    } catch (err) {
+      alert(err.message);
+    } finally {
+      profileBusy = false;
+    }
+  }
+
+  function closePlayerProfileModal() {
+    document.getElementById('player-profile-modal').style.display = 'none';
+    profileModalMode = null;
+    profileSessionPinHash = null;
+  }
+
+  async function handleChangePin() {
+    const id = document.getElementById('profile-player-id').value;
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    const newPin = prompt('Введите новый пароль (минимум 8 символов):');
+    if (newPin === null) return;
+    if (newPin.length < 8) {
+      alert('Пароль должен быть не короче 8 символов.');
+      return;
+    }
+    const newHash = await hashPin(newPin);
+    try {
+      if (adminMode) {
+        p.pin = newHash;
+        profileSessionPinHash = newHash;
+        await saveLocal();
+        alert('Пароль успешно обновлён администратором.');
+        return;
+      }
+
+      if (PROFILE_PROXY_URL) {
+        await callProfileProxy({ playerId: id, action: 'changePin', currentPinHash: profileSessionPinHash, newPinHash: newHash });
+      }
+      p.pin = newHash;
+      profileSessionPinHash = newHash;
+      saveLocal();
+      alert('Пароль успешно обновлён.');
+    } catch (err) {
+      alert(err.message);
+    }
+  }
+
+  async function resetPlayerPinFromProfile() {
+    const id = document.getElementById('profile-player-id').value;
+    if (!id) return;
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    if (confirm(`Сбросить пароль игрока «${p.name}»? Он сможет заново привязать профиль и задать новый пароль.`)) {
+      p.pin = null;
+      await saveLocal();
+      renderLeaderboardRoster();
+      closePlayerProfileModal();
+      alert(`Пароль игрока «${p.name}» успешно сброшен.`);
+    }
+  }
+
+  async function resetPlayerPin() {
+    const id = document.getElementById('form-player-id').value;
+    if (!id) return;
+    const p = players.find(x => x.id === id);
+    if (!p) return;
+    if (confirm(`Сбросить пароль игрока «${p.name}»? Он сможет привязать профиль заново с новым паролем.`)) {
+      p.pin = null;
+      await saveLocal();
+      renderLeaderboardRoster();
+      closePlayerModal();
+      alert('Пароль сброшен.');
+    }
+  }
+
+  function savePlayerForm() {
+    const id = document.getElementById('form-player-id').value;
+    const name = document.getElementById('form-player-name').value.trim();
+    const points = parseInt(document.getElementById('form-player-points').value, 10);
+    const macro = parseFloat(document.getElementById('form-player-macro').value) || 5.0;
+    const micro = parseFloat(document.getElementById('form-player-micro').value) || 5.0;
+    const fleet = parseFloat(document.getElementById('form-player-fleet').value) || 5.0;
+    const team = parseFloat(document.getElementById('form-player-team').value) || 6.0;
+    const score = parseFloat(((macro + micro + fleet + team) / 4).toFixed(1));
+    const desc = document.getElementById('form-player-desc').value.trim() || 'Игрок Hearts of Iron IV';
+
+    if (!name) return;
+
+    if (id) {
+      const p = players.find(x => x.id === id);
+      if (p) {
+        p.name = name; p.points = points; p.score = score;
+        p.macro = macro; p.micro = micro; p.fleet = fleet; p.team = team; p.desc = desc;
+      }
+    } else {
+      players.unshift({
+        id: "p-" + Date.now(),
+        name, points, score, macro, micro, fleet, team, iq: 6.0,
+        desc, wr: "—", wins: 0, games: 0, selected: true,
+        discord: "", favCountries: [], pin: null
+      });
+    }
+
+    closePlayerModal();
+    saveLocal();
+    renderLeaderboardRoster();
+  }
+
+  function deletePlayer(id) {
+    if (!adminMode) return;
+    const p = players.find(x => x.id === id);
+    if (p && confirm(`Удалить игрока "${p.name}" из базы данных?`)) {
+      players = players.filter(x => x.id !== id);
+      saveLocal();
+      renderLeaderboardRoster();
+    }
+  }
+
+  function exportBackupJSON() {
+    const data = { timestamp: new Date().toISOString(), players, matches };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `hoi4-manager-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function importBackupJSON(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      try {
+        const d = JSON.parse(evt.target.result);
+        if (d && Array.isArray(d.players)) {
+          players = d.players;
+          players.forEach(p => p.score = calcPlayerScore(p));
+          matches = d.matches || [];
+          saveLocal();
+          renderLeaderboardRoster();
+          alert('База данных HoI4 успешно восстановлена!');
+        }
+      } catch(err) {
+        alert('Ошибка при чтении JSON файла бэкапа.');
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  async function exportToPNG() {
+    const card = document.getElementById('roster-card');
+    document.body.classList.add('exporting');
+    const canvas = await html2canvas(card, { backgroundColor: '#0d132a', scale: 2 });
+    const a = document.createElement('a');
+    a.download = 'hoi4-leaderboard.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+    document.body.classList.remove('exporting');
+  }
+
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Закрытие модальных окон по клику на пустую область (оверлей)
+  window.addEventListener('click', function(event) {
+    // Проверяем, что клик был именно по темному фону, а не по самому окну внутри
+    if (event.target.classList.contains('modal-overlay')) {
+      // Вызываем родные функции закрытия для каждого окна, чтобы корректно сбрасывались данные
+      if (event.target.id === 'slot-pick-modal') closeSlotPickModal();
+      else if (event.target.id === 'player-modal') closePlayerModal();
+      else if (event.target.id === 'finish-match-modal') closeFinishMatchModal();
+      else if (event.target.id === 'player-profile-modal') closePlayerProfileModal();
+    }
+  });
+
+  loadData();
+</script>
+</body>
+</html>
