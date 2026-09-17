@@ -1035,7 +1035,7 @@
       </div>
 
       <div class="controls-search-actions">
-        <input type="text" id="search-input" class="search-box" placeholder="Поиск по позывному или досье..." oninput="renderLeaderboardRoster()">
+        <input type="text" id="search-input" class="search-box" placeholder="Поиск по никнейму..." oninput="renderLeaderboardRoster()">
         <div class="action-btns">
           <button id="admin-toggle-btn" class="btn btn-admin" onclick="toggleAdminLogin()">🔑 Админ</button>
           <button id="btn-add-player" class="btn btn-gold" style="display: none;" onclick="openAddPlayerModal()">➕ Игрок</button>
@@ -2210,7 +2210,6 @@
           <div style="color:${slot.type === 'general' ? '#bae6fd' : '#f8fafc'};">
             ${slot.country}
           </div>
-          <div style="font-size:10px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;">${slot.role}</div>
         </div>
       </div>
       <div class="slot-player-info">${playerHtml}</div>
@@ -2289,7 +2288,7 @@
     const targetSlot = slots[slotIndex];
     document.getElementById('slot-modal-title').innerHTML = `
       ${getCountryFlagHtml(targetSlot.code, targetSlot.country)}
-      <span style="margin-left:8px;">${targetSlot.country} (${targetSlot.role}) — Назначение</span>
+      <span style="margin-left:8px;">${targetSlot.country} — Назначение</span>
     `;
     document.getElementById('slot-player-search').value = '';
     renderSlotPlayerList();
@@ -2311,12 +2310,12 @@
     const occupiedMap = new Map();
     currentLobby.axisSlots.forEach((s, idx) => {
       if (s.player && !(slotAssignContext.faction === 'axis' && slotAssignContext.slotIndex === idx)) {
-        occupiedMap.set(s.player.id, `Ось • ${s.country} (${s.role})`);
+        occupiedMap.set(s.player.id, `Ось • ${s.country}`);
       }
     });
     currentLobby.alliesSlots.forEach((s, idx) => {
       if (s.player && !(slotAssignContext.faction === 'allies' && slotAssignContext.slotIndex === idx)) {
-        occupiedMap.set(s.player.id, `Союзники • ${s.country} (${s.role})`);
+        occupiedMap.set(s.player.id, `Союзники • ${s.country}`);
       }
     });
 
@@ -2495,14 +2494,14 @@
 
       const axisTeamHtml = (m.axisTeam || []).map(p => `
         <div style="display:flex; justify-content:space-between; font-size:13px; border-bottom:1px solid rgba(245,158,11,0.15); padding:6px 0;">
-          <span style="color:#f8fafc;">${escapeHtml(p.country)} <span style="color:var(--text-muted); font-size:10px;">(${escapeHtml(p.role)})</span></span>
+          <span style="color:#f8fafc;">${escapeHtml(p.country)}</span>
           <strong style="color:var(--axis-border);">${p.name ? escapeHtml(p.name) : '<span style="color:var(--text-muted); font-weight:normal;">Свободно</span>'}</strong>
         </div>
       `).join('');
 
       const alliesTeamHtml = (m.alliesTeam || []).map(p => `
         <div style="display:flex; justify-content:space-between; font-size:13px; border-bottom:1px solid rgba(56,189,248,0.15); padding:6px 0;">
-          <span style="color:#f8fafc;">${escapeHtml(p.country)} <span style="color:var(--text-muted); font-size:10px;">(${escapeHtml(p.role)})</span></span>
+          <span style="color:#f8fafc;">${escapeHtml(p.country)}</span>
           <strong style="color:#7dd3fc;">${p.name ? escapeHtml(p.name) : '<span style="color:var(--text-muted); font-weight:normal;">Свободно</span>'}</strong>
         </div>
       `).join('');
